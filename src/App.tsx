@@ -1,7 +1,14 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./style.scss";
 
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>{/* <Route path="/" element={<Login />} /> */}</Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
