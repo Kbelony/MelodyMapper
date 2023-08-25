@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Gilroy-Semi-Bold;
+  src: url(./assets/font/Gilroy-SemiBold.ttf);
+}
+@font-face {
+  font-family: Product-Sans;
+  src: url(./assets/font/Product-Sans.ttf);
+}
+@font-face {
+    font-family: Product-Sans-Regular;
+    src: url(./assets/font/Product-Sans-Regular.ttf);
+  }
+@font-face {
+    font-family: Habanera;
+    src: url(./assets/font/Habanera-Black.ttf);
+  }
+  @font-face {
+    font-family: Habanera-Outline;
+    src: url(./assets/font/HabaneraExtras-Outline.ttf);
+  }
+
+body{
+    background-color: #1D1D1D;
+    color: #f9f9f9;
+
+    font-family: 'Product-Sans';
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-component{
+    nav ul{
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        width: 100%;
+    }
+}
+.home-component {
+    width: 100%;
+    .text {
+      .container {
+        h4 {
+          span {
+            background-image: linear-gradient(180deg, #1FDF64 0%, rgba(24, 195, 113, 0.53) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+        p{
+            font-family: 'Product-Sans-Regular';
+        }
+      }
+    }
+    .spotify-button{
+        background-color: #1FDF64;
+        margin-left:68%;
+        display: flex;
+        align-items: center;
+        font-size: 12.8px;
+    }
+    @media (max-width: 820px) {
+        .part2{
+            display: none;
+        }
+        .spotify-button{
+            margin-left:27%;
+            font-size: 12.8px;
+        }
+      }
+  }
