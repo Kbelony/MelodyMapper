@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: Gilroy-Semi-Bold;
+  src: url(./assets/font/Gilroy-SemiBold.ttf);
+}
+@font-face {
+  font-family: Product-Sans;
+  src: url(./assets/font/Product-Sans.ttf);
+}
+@font-face {
+    font-family: Habanera;
+    src: url(./assets/font/Habanera-Black.ttf);
+  }
+  @font-face {
+    font-family: Habanera-Outline;
+    src: url(./assets/font/HabaneraExtras-Outline.ttf);
+  }
+
+body{
+    background-color: #1D1D1D;
+    color: #f9f9f9;
+
+    font-family: 'Product-Sans';
+    margin: 0;
+    padding: 0;
+}
