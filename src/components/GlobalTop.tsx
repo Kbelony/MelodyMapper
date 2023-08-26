@@ -98,7 +98,7 @@ const GlobalTop = () => {
               <span>{Math.floor(Math.random() * (95 - 85 + 1) + 85)}%</span> des
               auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
-            <span className="more-button text-center mt-9 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+            <span className="more-button text-center mt-7 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
               + de statistique
             </span>
           </div>
