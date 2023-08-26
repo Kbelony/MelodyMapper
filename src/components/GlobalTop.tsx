@@ -70,7 +70,7 @@ const GlobalTop = () => {
             {Array.from({ length: 4 }).map((_, index) => (
               <h2
                 key={index}
-                style={index === 0 ? { fontFamily: "Habanera" } : {}}
+                style={index === 2 ? { fontFamily: "Habanera" } : {}}
               >
                 {topArtist?.name ?? "Unknown Artist"}
               </h2>
