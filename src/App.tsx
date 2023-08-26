@@ -10,7 +10,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/MelodyMapper/" element={<Home />} />
-        <Route path="/MelodyMapper/global-top" element={<GlobalTop />} />
+        <Route path="/MelodyMapper/global-top/" element={<GlobalTop />} />
       </Routes>
     </div>
   );
