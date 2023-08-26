@@ -89,8 +89,9 @@ const GlobalTop = () => {
               📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
             </h4>
             <h6 className="text-center text-lg">
-              Vous etes dans le top <span>88%</span> des auditeurs de :{" "}
-              {topArtist?.name ?? "Unknown Artist"} 👏
+              Vous êtes dans le top{" "}
+              <span>{Math.floor(Math.random() * (95 - 85 + 1) + 85)}%</span> des
+              auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
           </div>
         </div>
