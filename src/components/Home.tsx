@@ -3,7 +3,7 @@ import spotifyLogo from "../assets/images/spotify.svg";
 const Home = () => {
   const clientId = "c6f079fb0ae4482584d715aaafe5efb1";
   const authEndpoint = "https://accounts.spotify.com/authorize";
-  const redirectUrl = "http://localhost:5173/MelodyMapper/global-top";
+  const redirectUrl = "https://kbelony.github.io/MelodyMapper/global-top";
   const responseType = "token";
   const scope = "user-top-read";
 
