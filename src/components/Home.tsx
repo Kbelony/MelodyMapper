@@ -1,11 +1,19 @@
 import spotifyLogo from "../assets/images/spotify.svg";
 
 const Home = () => {
+  const clientId = "c6f079fb0ae4482584d715aaafe5efb1";
+  const authEndpoint = "https://accounts.spotify.com/authorize";
+  const redirectUrl = "http://localhost:5173/MelodyMapper/global-top";
+  const responseType = "token";
+  const scope = "user-top-read";
+
+  const authUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=${scope}`;
+
   return (
     <div className="home-component">
-      <div className=" flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <div className="container md:mt-28 mt-8 p-0 md:p-9">
-          <h4 className="text-3xl md:text-4xl text-center mb-4 p-3">
+          <h4 className="text-3xl md:text-5xl text-center mb-4 p-3">
             La <span>bande-son</span> mondiale de vos favoris.
           </h4>
           <p className="text-lg md:text-4xl md:p-8 text-center mb-8 p-4">
@@ -17,10 +25,19 @@ const Home = () => {
             premier à être informé de son lancement en vous inscrivant sur notre
             liste d'attente.
           </p>
-          <span className="spotify-button p-4 w-44 rounded-2xl grid grid-cols-1 justify-items-center">
-            <img className="w-8 mr-1 ml-0 md:ml-5" src={spotifyLogo} />
-            Connexion Spotify
-          </span>
+          <a href={authUrl}>
+            <span className="spotify-button p-4 w-44 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+              <img
+                className="w-8 mr-1 ml-0 md:ml-6"
+                src={spotifyLogo}
+                alt="Spotify Logo"
+              />
+              Connexion Spotify
+            </span>
+          </a>
+          <div className="information md:text-lg flex flex-col items-center justify-center">
+            <p> Home | About | Privacy Policy | Contact</p>
+          </div>
         </div>
       </div>
     </div>
