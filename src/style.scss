@@ -41,8 +41,8 @@ body{
         width: 100%;
     }
     .logo{
-      z-index: 1000;
-      position: relative;
+      z-index: 10000;
+      position: absolute;
     }
 }
 .home-component {
