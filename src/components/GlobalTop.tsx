@@ -10,6 +10,7 @@ const GlobalTop = () => {
     name: string;
     images: { url: string }[];
     genres: string[];
+    popularity: number;
     // Ajoutez d'autres propriétés si nécessaire
   }
 
@@ -70,7 +71,7 @@ const GlobalTop = () => {
             {Array.from({ length: 4 }).map((_, index) => (
               <h2
                 key={index}
-                style={index === 2 ? { fontFamily: "Habanera" } : {}}
+                style={index === 1 ? { fontFamily: "Habanera" } : {}}
               >
                 {topArtist?.name ?? "Unknown Artist"}
               </h2>
@@ -95,10 +96,10 @@ const GlobalTop = () => {
             </h4>
             <h6 className="text-center text-lg">
               Vous êtes dans le top{" "}
-              <span>{Math.floor(Math.random() * (95 - 85 + 1) + 85)}%</span> des
+              <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span> des
               auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
-            <span className="more-button text-center mt-7 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+            <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
               + de statistique
             </span>
           </div>
