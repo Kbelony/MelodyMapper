@@ -3,11 +3,17 @@ import axios from "axios";
 
 const GlobalTop = () => {
   const urlParams = new URLSearchParams(window.location.hash.substring(1));
-  const access_token = urlParams.get("access_token");
-
+  const access_token = urlParams.get("access_token") ?? "";
   localStorage.setItem("access_token", access_token);
 
-  const [topArtist, setTopArtist] = useState(null);
+  interface Artist {
+    name: string;
+    images: { url: string }[];
+    genres: string[];
+    // Ajoutez d'autres propriétés si nécessaire
+  }
+
+  const [topArtist, setTopArtist] = useState<Artist | null>(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token") || "";
@@ -26,7 +32,7 @@ const GlobalTop = () => {
         });
 
         console.log("Top Artists:", response.data.items);
-        setTopArtist(response.data.items[0]); // Set the first artist from the response
+        setTopArtist(response.data.items[2]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -48,7 +54,56 @@ const GlobalTop = () => {
           backgroundImage: topArtist ? `url(${topArtist.images[0].url})` : "",
         }}
       >
-        <p>mobile</p>
+        <div className="text-wrapper-container">
+          <div className="shadow"></div>
+          <div className="text-wrapper mt-24">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper op-8">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper op-4">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="text-wrapper op-2">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
+            ))}
+          </div>
+          <div className="meta p-2">
+            <h4 className="text-2xl mb-3">
+              🎙️ Artiste du moment : {topArtist?.name ?? "Unknown Artist"}
+            </h4>
+            <h4 className="text-2xl mb-4">
+              📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
+            </h4>
+            <h6 className="text-center text-lg">
+              Vous etes dans le top <span>88%</span> des auditeurs de :{" "}
+              {topArtist?.name ?? "Unknown Artist"} 👏
+            </h6>
+          </div>
+        </div>
       </div>
     </div>
   );
