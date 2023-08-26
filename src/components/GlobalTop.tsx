@@ -66,16 +66,6 @@ const GlobalTop = () => {
               <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
             ))}
           </div>
-          <div className="text-wrapper">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
-            ))}
-          </div>
-          <div className="text-wrapper">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
-            ))}
-          </div>
           <div className="text-wrapper op-8">
             {Array.from({ length: 4 }).map((_, index) => (
               <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
