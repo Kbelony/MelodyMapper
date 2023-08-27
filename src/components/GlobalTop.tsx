@@ -58,7 +58,33 @@ const GlobalTop = () => {
   return (
     <div className="global-component">
       <div className="desktop-part">
-        <p>desktop</p>
+        <div className="mt-20 flex">
+          <div className="stats-part p-9 mt-36 flex-grow">
+            <h4 className="text-4xl mb-9">
+              Place au <span>stastisques</span> !
+            </h4>
+            <div className="meta p-2">
+              <h4 className="text-3xl mb-7">
+                🎙️ Artiste du moment : {topArtist?.name ?? "Unknown Artist"}
+              </h4>
+              <h4 className="text-3xl mb-7">
+                📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
+              </h4>
+              <h6 className="text-center text-lg">
+                Vous êtes dans le top{" "}
+                <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
+                des auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
+              </h6>
+              <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+                + de statistiques
+              </span>
+            </div>
+          </div>
+          <div className="image-part relative">
+            <img src={topArtist?.images[0]?.url} alt="" />
+            <div className="shadow-overlay"></div>
+          </div>
+        </div>
       </div>
       <div
         className="mobile-part"
@@ -82,7 +108,7 @@ const GlobalTop = () => {
             {Array.from({ length: 4 }).map((_, index) => (
               <h2
                 key={index}
-                style={index === 1 ? { fontFamily: "Habanera" } : {}}
+                style={index === 0 ? { fontFamily: "Habanera" } : {}}
               >
                 {topArtist?.name ?? "Unknown Artist"}
               </h2>
@@ -111,7 +137,7 @@ const GlobalTop = () => {
               auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
             <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-              + de statistique
+              + de statistiques
             </span>
           </div>
         </div>
