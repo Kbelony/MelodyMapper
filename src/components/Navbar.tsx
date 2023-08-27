@@ -52,7 +52,6 @@ const Navbar = () => {
             >
               <div className="py-1" role="none">
                 <a
-                  href="#"
                   className="text-gray-700 block px-4 py-2 text-sm"
                   role="menuitem"
                   id="menu-item-1"
@@ -64,7 +63,6 @@ const Navbar = () => {
                   🇫🇷 French
                 </a>
                 <a
-                  href="#"
                   className="text-gray-700 block px-4 py-2 text-sm"
                   role="menuitem"
                   id="menu-item-2"

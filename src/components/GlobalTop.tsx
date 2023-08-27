@@ -39,7 +39,7 @@ const GlobalTop = () => {
       moreButton: "+ de stastisques",
     },
     en: {
-      statsSlogan: "Make way for <span>stastisques</span>!",
+      statsSlogan: "Make way for <span>stastisques</span> !",
       artistStat: "🎙️ Artist of the moment",
       genreStat: "📝 Genre of the moment",
       discover: "Discover similar artists?",
