@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LanguageContext } from "./LanguageContext";
 import axios from "axios";
 
 const GlobalTop = () => {
@@ -7,6 +9,7 @@ const GlobalTop = () => {
   const urlParams = new URLSearchParams(window.location.hash.substring(1));
   const access_token = urlParams.get("access_token") ?? "";
   localStorage.setItem("access_token", access_token);
+  const { language } = useContext(LanguageContext) || { language: "en" };
 
   interface Artist {
     name: string;
@@ -17,6 +20,36 @@ const GlobalTop = () => {
     id: string;
   }
 
+  interface Translations {
+    [key: string]: {
+      statsSlogan: string;
+      artistStat: string;
+      genreStat: string;
+      discover: string;
+      moreButton: string;
+    };
+  }
+
+  const translations: Translations = {
+    fr: {
+      statsSlogan: "Place au <span>stastisques</span> !",
+      artistStat: "🎙️ Artiste du moment",
+      genreStat: "📝 Genre du moment",
+      discover: "Découvrir des artistes similaires ?",
+      moreButton: "+ de stastisques",
+    },
+    en: {
+      statsSlogan: "Make way for <span>stastisques</span> !",
+      artistStat: "🎙️ Artist of the moment",
+      genreStat: "📝 Genre of the moment",
+      discover: "Discover similar artists?",
+      moreButton: "+ statistics",
+    },
+  };
+
+  const translationKey = language || "en";
+  const { statsSlogan, artistStat, genreStat, discover, moreButton } =
+    translations[translationKey];
   const [topArtist, setTopArtist] = useState<Artist | null>(null);
   const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
 
@@ -37,7 +70,7 @@ const GlobalTop = () => {
         });
 
         console.log("Top Artists:", response.data.items);
-        setTopArtist(response.data.items[1]); // Set the first artist from the response
+        setTopArtist(response.data.items[0]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -86,24 +119,23 @@ const GlobalTop = () => {
       <div className="desktop-part">
         <div className="mt-20 flex">
           <div className="stats-part p-9 mt-24 flex-grow">
-            <h4 className="text-4xl mb-9">
-              Place au <span>stastisques</span> !
-            </h4>
+            <h4
+              className="text-4xl mb-9"
+              dangerouslySetInnerHTML={{ __html: statsSlogan as string }}
+            ></h4>
             <div className="meta p-2">
               <h4 className="text-3xl mb-7">
-                🎙️ Artiste du moment : {topArtist?.name ?? "Unknown Artist"}
+                {artistStat} : {topArtist?.name ?? "Unknown Artist"}
               </h4>
               <h4 className="text-3xl mb-7">
-                📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
+                {genreStat} : {topArtist?.genres[0] ?? "Unknown genre"}
               </h4>
               <h6 className="text-center text-lg mb-6">
                 Vous êtes dans le top{" "}
                 <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
                 des auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
               </h6>
-              <h6 className="text-center text-lg mb-8 ">
-                Découvrir des artistes similaires ?
-              </h6>
+              <h6 className="text-center text-lg mb-8 ">{discover}</h6>
               <div className="related-artists mb-5 mr-11">
                 <div className="related-artists">
                   {relatedArtists.slice(0, 3).map((artist) => (
@@ -120,7 +152,7 @@ const GlobalTop = () => {
                 </div>
               </div>
               <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-                + de statistiques
+                {moreButton}
               </span>
             </div>
           </div>
@@ -170,10 +202,10 @@ const GlobalTop = () => {
           </div>
           <div className="meta p-2">
             <h4 className="text-2xl mb-3">
-              🎙️ Artiste du moment : {topArtist?.name ?? "Unknown Artist"}
+              {artistStat} : {topArtist?.name ?? "Unknown Artist"}
             </h4>
             <h4 className="text-2xl mb-4">
-              📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
+              {genreStat} : {topArtist?.genres[0] ?? "Unknown genre"}
             </h4>
             <h6 className="text-center text-lg">
               Vous êtes dans le top{" "}
@@ -181,7 +213,7 @@ const GlobalTop = () => {
               auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
             <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-              + de statistiques
+              {moreButton}
             </span>
           </div>
         </div>
