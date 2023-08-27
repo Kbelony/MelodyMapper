@@ -9,6 +9,9 @@ const Navbar = () => {
   const languageContext = useContext(LanguageContext);
   const switchLanguage = languageContext?.switchLanguage || (() => {});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -73,14 +76,17 @@ const Navbar = () => {
                   🇺🇸 English
                 </a>
                 <form method="POST" action="#" role="none">
-                  <button
-                    type="submit"
-                    className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                    role="menuitem"
-                    id="menu-item-3"
-                  >
-                    Sign out
-                  </button>
+                  <Link to="/MelodyMapper/">
+                    <button
+                      type="submit"
+                      className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                      role="menuitem"
+                      id="menu-item-3"
+                      onClick={handleSignOut}
+                    >
+                      Sign out
+                    </button>
+                  </Link>
                 </form>
               </div>
             </div>
