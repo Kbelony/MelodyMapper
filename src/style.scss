@@ -43,6 +43,12 @@ body{
     .logo{
       z-index: 10000;
       position: absolute;
+      margin-left: -85px;
+    }
+    @media (max-width: 820px) {
+      .logo{
+        margin-left: 0px;
+      }
     }
 }
 .home-component {
@@ -166,20 +172,22 @@ body{
               -webkit-text-fill-color: transparent;
             }
           }
-          .more-button{
-            background-color: #1D1D1D;
+        @media (max-width: 820px) {
+            .more-button{
+              background-color: #1D1D1D;
             margin-left: 40%;
             display: flex;
             align-items: center;
             font-size: 120%;
             width: 290px;
-        }
-        @media (max-width: 820px) {
-            .more-button{
                 margin-left: 19%;
                 font-size: 1.2rem;
                 width: 62%;
-                padding-left: 55px;
+                padding-left: 58px;
+            }
+            .more-button:hover{
+              background-color: rgba(64, 64, 64, 1);
+              color: white;
             }
           }
         }

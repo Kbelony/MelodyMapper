@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const GlobalTop = () => {
+  const navigate = useNavigate();
   const urlParams = new URLSearchParams(window.location.hash.substring(1));
   const access_token = urlParams.get("access_token") ?? "";
   localStorage.setItem("access_token", access_token);
@@ -43,6 +45,15 @@ const GlobalTop = () => {
       fetchData();
     }
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!topArtist?.name) {
+        navigate("/MelodyMapper/");
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [topArtist]);
 
   return (
     <div className="global-component">
