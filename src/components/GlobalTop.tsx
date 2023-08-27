@@ -37,7 +37,7 @@ const GlobalTop = () => {
         });
 
         console.log("Top Artists:", response.data.items);
-        setTopArtist(response.data.items[1]); // Set the first artist from the response
+        setTopArtist(response.data.items[0]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }

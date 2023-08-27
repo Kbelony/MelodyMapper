@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import logoText from "../assets/images/Logo-with-text.svg";
+import world from "../assets/images/world.svg";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <nav>
       <div className="navbar-component mb-4">
@@ -12,6 +20,54 @@ const Navbar = () => {
                 <img className="w-40" src={logoText} />
               </picture>
             </Link>
+          </li>
+          <li className="nav-list-item md:flex md:justify-end">
+            <picture
+              className="world"
+              id="menu-button"
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="true"
+              onClick={toggleDropdown}
+            >
+              <img className="w-7 mr-8 mt-2" src={world} />
+            </picture>
+            <div
+              className={`translation-dropdown absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
+                isDropdownOpen ? "" : "hidden"
+              }`}
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+            >
+              <div className="py-1" role="none">
+                <a
+                  href="#"
+                  className="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem"
+                  id="menu-item-1"
+                >
+                  🇫🇷 French
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-700 block px-4 py-2 text-sm"
+                  role="menuitem"
+                  id="menu-item-2"
+                >
+                  🇺🇸 English
+                </a>
+                <form method="POST" action="#" role="none">
+                  <button
+                    type="submit"
+                    className="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                    role="menuitem"
+                    id="menu-item-3"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

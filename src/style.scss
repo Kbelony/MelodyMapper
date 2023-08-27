@@ -40,10 +40,16 @@ body{
         text-indent: 0;
         width: 100%;
     }
-    .logo{
+    .translation-dropdown{
+      position: absolute;
+      top: 60px;
+      right: 30px;
+    }
+    .logo,.world{
       z-index: 10000;
       position: absolute;
       margin-left: -85px;
+      cursor: pointer;
     }
     @media (max-width: 820px) {
       .logo{
@@ -93,10 +99,9 @@ body{
     .more-button{
       background-color: rgba(64, 64, 64, 1);
       cursor: pointer;
-    margin-left: 40%;
     display: flex;
     align-items: center;
-        margin-left: 35%;
+        margin-left: 37%;
         font-size: 1rem;
         width: 12rem;
         padding-left: 2.4rem;
@@ -107,22 +112,27 @@ body{
     }
     .image-part {
       position: relative;
+      height: 100vh;
+    
       img {
         height: 90vh;
         max-width: 50vw;
+        display: block;
       }
+    
       .shadow-overlay {
         content: "";
         background-image: radial-gradient(farthest-side at 73% 21%, transparent, rgb(26, 29, 41));
         position: absolute;
         top: 0;
         right: 0;
-        bottom: 0;
+        bottom: 88px; /* Ajustez cette valeur pour éviter le dépassement */
         left: 0;
         z-index: 40;
         opacity: 0.7;
       }
     }
+    
     .related-artists{
       display: flex;
       align-items: center;
