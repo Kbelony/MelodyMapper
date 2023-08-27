@@ -2,12 +2,20 @@ import { Link } from "react-router-dom";
 import logoText from "../assets/images/Logo-with-text.svg";
 import world from "../assets/images/world.svg";
 import { useState } from "react";
+import { useContext } from "react";
+import { LanguageContext } from "./LanguageContext";
 
 const Navbar = () => {
+  const languageContext = useContext(LanguageContext);
+  const switchLanguage = languageContext?.switchLanguage || (() => {});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -45,6 +53,10 @@ const Navbar = () => {
                   className="text-gray-700 block px-4 py-2 text-sm"
                   role="menuitem"
                   id="menu-item-1"
+                  onClick={() => {
+                    switchLanguage("fr");
+                    closeDropdown();
+                  }}
                 >
                   🇫🇷 French
                 </a>
@@ -53,6 +65,10 @@ const Navbar = () => {
                   className="text-gray-700 block px-4 py-2 text-sm"
                   role="menuitem"
                   id="menu-item-2"
+                  onClick={() => {
+                    switchLanguage("en");
+                    closeDropdown();
+                  }}
                 >
                   🇺🇸 English
                 </a>
