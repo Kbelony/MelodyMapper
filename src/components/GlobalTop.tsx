@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const GlobalTop = () => {
+  const navigate = useNavigate();
   const urlParams = new URLSearchParams(window.location.hash.substring(1));
   const access_token = urlParams.get("access_token") ?? "";
   localStorage.setItem("access_token", access_token);
@@ -11,10 +13,12 @@ const GlobalTop = () => {
     images: { url: string }[];
     genres: string[];
     popularity: number;
-    // Ajoutez d'autres propriétés si nécessaire
+    external_urls: { spotify: string }; // Modifié pour être un objet
+    id: string;
   }
 
   const [topArtist, setTopArtist] = useState<Artist | null>(null);
+  const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token") || "";
@@ -33,7 +37,7 @@ const GlobalTop = () => {
         });
 
         console.log("Top Artists:", response.data.items);
-        setTopArtist(response.data.items[0]); // Set the first artist from the response
+        setTopArtist(response.data.items[1]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -44,10 +48,87 @@ const GlobalTop = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (topArtist) {
+      const artistId = topArtist.id;
+      const relatedArtistsUrl = `https://api.spotify.com/v1/artists/${artistId}/related-artists`;
+
+      const fetchRelatedArtists = async () => {
+        try {
+          const response = await axios.get(relatedArtistsUrl, {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
+          });
+
+          console.log("Related Artists:", response.data.artists);
+          setRelatedArtists(response.data.artists);
+        } catch (error) {
+          console.error("Error fetching related artists:", error);
+        }
+      };
+
+      fetchRelatedArtists();
+    }
+  }, [topArtist, access_token]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!topArtist?.name) {
+        navigate("/MelodyMapper/");
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [topArtist]);
+
   return (
     <div className="global-component">
       <div className="desktop-part">
-        <p>desktop</p>
+        <div className="mt-20 flex">
+          <div className="stats-part p-9 mt-24 flex-grow">
+            <h4 className="text-4xl mb-9">
+              Place au <span>stastisques</span> !
+            </h4>
+            <div className="meta p-2">
+              <h4 className="text-3xl mb-7">
+                🎙️ Artiste du moment : {topArtist?.name ?? "Unknown Artist"}
+              </h4>
+              <h4 className="text-3xl mb-7">
+                📝 Genre du moment : {topArtist?.genres[0] ?? "Unknown genre"}
+              </h4>
+              <h6 className="text-center text-lg mb-6">
+                Vous êtes dans le top{" "}
+                <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
+                des auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
+              </h6>
+              <h6 className="text-center text-lg mb-8 ">
+                Découvrir des artistes similaires ?
+              </h6>
+              <div className="related-artists mb-5 mr-11">
+                <div className="related-artists">
+                  {relatedArtists.slice(0, 3).map((artist) => (
+                    <Link
+                      key={artist.id}
+                      to={artist.external_urls.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img src={artist.images[0].url} alt={artist.name} />
+                      <h6 className="text-center mt-3">{artist.name}</h6>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+                + de statistiques
+              </span>
+            </div>
+          </div>
+          <div className="image-part relative">
+            <img src={topArtist?.images[0]?.url} alt="" />
+            <div className="shadow-overlay"></div>
+          </div>
+        </div>
       </div>
       <div
         className="mobile-part"
@@ -71,7 +152,7 @@ const GlobalTop = () => {
             {Array.from({ length: 4 }).map((_, index) => (
               <h2
                 key={index}
-                style={index === 1 ? { fontFamily: "Habanera" } : {}}
+                style={index === 0 ? { fontFamily: "Habanera" } : {}}
               >
                 {topArtist?.name ?? "Unknown Artist"}
               </h2>
@@ -100,7 +181,7 @@ const GlobalTop = () => {
               auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
             <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-              + de statistique
+              + de statistiques
             </span>
           </div>
         </div>
