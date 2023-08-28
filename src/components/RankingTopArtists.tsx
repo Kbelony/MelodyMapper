@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
+import back from "../assets/images/Vector.svg";
+import { useNavigate } from "react-router-dom";
 
 const RankingTopArtists = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
+  const history = useNavigate();
 
   interface ArtistType {
     name: string;
@@ -17,22 +20,25 @@ const RankingTopArtists = () => {
     [key: string]: {
       slogan: string;
       topArtist: string;
+      navigate: string;
     };
   }
 
   const translations: Translations = {
     fr: {
       slogan: "Place au <span>stastisques</span> !",
-      topArtist: "Top artistes",
+      topArtist: "Classement de vos artistes du moment",
+      navigate: "Page précedente",
     },
     en: {
       slogan: "Make way for <span>stastisques</span> !",
-      topArtist: "Top artists",
+      topArtist: "Ranking your artists of the moment",
+      navigate: "Previous page",
     },
   };
 
   const translationKey = language || "en";
-  const { slogan, topArtist } = translations[translationKey];
+  const { slogan, topArtist, navigate } = translations[translationKey];
 
   const topArtists = JSON.parse(localStorage.getItem("top_artist") ?? "[]");
   const firstArtist = topArtists.slice(0, 1)[0];
@@ -44,9 +50,13 @@ const RankingTopArtists = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="container mt-16 md:mt-12 p-0 md:p-9">
           <h4
-            className="text-xl md:text-3xl text-center mb-4 p-3"
+            className="text-2xl md:text-3xl text-center mb-4 p-3"
             dangerouslySetInnerHTML={{ __html: slogan as string }}
           ></h4>
+          <div className="back-button flex" onClick={() => history(-1)}>
+            <img className="mr-2 mt-1" src={back} alt="" />
+            <p className="text-sm">{navigate}</p>
+          </div>
           <div className="flex justify-center items-center h-screen mb-8">
             <div className="container content-border">
               <div className="top-artist">
