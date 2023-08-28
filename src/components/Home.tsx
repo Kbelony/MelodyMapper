@@ -10,6 +10,8 @@ const Home = () => {
       slogan: string;
       description: string;
       connexion: string;
+      about: string;
+      privacy: string;
     };
   }
 
@@ -19,17 +21,22 @@ const Home = () => {
       description:
         "Découvrez la tapisserie harmonieuse du monde avec MelodyMapper. Attribuez des villes à vos 10 morceaux Spotify préférés et observez votre voyage musical dévoiler des mélodies qui résonnent dans différents paysages urbains. MelodyMapper n'est pas encore disponible pour tout le monde, mais cela ne saurait tarder. Soyez le premier à être informé de son lancement en vous inscrivant sur notre liste d'attente.",
       connexion: "Connexion Spotify",
+      about: "A propos",
+      privacy: "Politique de la vie privée",
     },
     en: {
       slogan: "The <span>global soundtrack</span> of your favorites.",
       description:
         "Discover the harmonious tapestry of the world with MelodyMapper. Assign cities to your top 10 Spotify tracks and watch your musical journey unfold with melodies that resonate in different urban landscapes. MelodyMapper is not yet available to everyone, but it won't be long. Be the first to be notified of its launch by signing up for our waiting list.",
       connexion: "Spotify Login",
+      about: "About",
+      privacy: "Privacy Policy",
     },
   };
 
   const translationKey = language || "en";
-  const { slogan, description, connexion } = translations[translationKey];
+  const { slogan, description, connexion, about, privacy } =
+    translations[translationKey];
 
   const clientId = "c6f079fb0ae4482584d715aaafe5efb1";
   const authEndpoint = "https://accounts.spotify.com/authorize";
@@ -60,8 +67,10 @@ const Home = () => {
               {connexion}
             </span>
           </a>
-          <div className="information md:text-lg flex flex-col items-center justify-center">
-            <p> Home | About | Privacy Policy | Contact</p>
+          <div className="information md:text-lg flex items-center justify-center">
+            <p>{about} | </p>
+            <p className="ml-2"> {privacy} | </p>
+            <p className="ml-2">Contact</p>
           </div>
         </div>
       </div>
