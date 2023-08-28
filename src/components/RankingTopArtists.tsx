@@ -53,7 +53,7 @@ const RankingTopArtists = () => {
             className="text-2xl md:text-3xl text-center mb-4 p-3"
             dangerouslySetInnerHTML={{ __html: slogan as string }}
           ></h4>
-          <div className="back-button flex" onClick={() => history(-1)}>
+          <div className="back-button flex mb-5" onClick={() => history(-1)}>
             <img className="mr-2 mt-1" src={back} alt="" />
             <p className="text-sm">{navigate}</p>
           </div>
