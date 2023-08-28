@@ -310,6 +310,9 @@ body{
           max-height: 60px;
           border-radius: 50%;
         }
+        .arrow{
+    width: 20px;
+        }
       }
     }
   }
@@ -320,8 +323,8 @@ body{
       margin-top: 30rem!important;
     }
     .back-button{
-      position: absolute;
-    top: 165;
+      position: relative;
+    top: -16px;
     left: 30px;
     img{
       width: 15px;
