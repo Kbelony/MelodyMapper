@@ -304,7 +304,12 @@ body{
   .back-button{
     cursor: pointer;
   }
-
+  .toggle-switch{
+    position: relative;
+    top: -39px;
+    left: 90%;
+    width: 70px;
+  }
   .top-artist{
     .ranking{
       .related-artists-container {
@@ -351,7 +356,12 @@ body{
         border: none;
       }
     }
-    
+    .toggle-switch{
+      position: relative;
+      top: -39px;
+      left: 300px!important;
+      width: 70px;
+    }
     .back-button{
       position: relative;
     top: -9px;
