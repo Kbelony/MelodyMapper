@@ -294,6 +294,14 @@ body{
       -webkit-text-fill-color: transparent;
     }
   }
+  .top-tracks{
+    .items{
+      img{
+        width: 60px;
+        max-height: 60px;
+      }
+    }
+  }
   .content-border{
     border:2px solid #FFA41C;
     border-radius: 10px;
