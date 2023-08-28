@@ -2,17 +2,19 @@ import { useContext } from "react";
 import { LanguageContext } from "./LanguageContext";
 import back from "../assets/images/Vector.svg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const RankingTopArtists = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
   const history = useNavigate();
+  const accessToken = localStorage.getItem("access_token") || "";
 
   interface ArtistType {
     name: string;
     images: { url: string }[];
     genres: string[];
     popularity: number;
-    external_urls: { spotify: string }; // Modifié pour être un objet
+    external_urls: { spotify: string };
     id: string;
   }
 
@@ -28,7 +30,7 @@ const RankingTopArtists = () => {
     fr: {
       slogan: "Place au <span>stastisques</span> !",
       topArtist: "Classement de vos artistes du moment",
-      navigate: "Page précedente",
+      navigate: "Page précédente",
     },
     en: {
       slogan: "Make way for <span>stastisques</span> !",
@@ -40,10 +42,27 @@ const RankingTopArtists = () => {
   const translationKey = language || "en";
   const { slogan, topArtist, navigate } = translations[translationKey];
 
-  const topArtists = JSON.parse(localStorage.getItem("top_artist") ?? "[]");
-  const firstArtist = topArtists.slice(0, 1)[0];
-  const secondArtist = topArtists.slice(1, 2)[0];
-  const thirdArtist = topArtists.slice(2, 3)[0];
+  const topArtists = JSON.parse(localStorage.getItem("top_artist") || "[]");
+  const firstArtist = topArtists[0];
+  const secondArtist = topArtists[1];
+  const thirdArtist = topArtists[2];
+
+  const handleArtistClick = async (artist: ArtistType) => {
+    const relatedArtistsUrl = `https://api.spotify.com/v1/artists/${artist.id}/related-artists`;
+
+    try {
+      const response = await axios.get(relatedArtistsUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const relatedArtists = response.data.artists.slice(0, 3);
+      console.log("Related Artists:", relatedArtists);
+    } catch (error) {
+      console.error("Error fetching related artists:", error);
+    }
+  };
 
   return (
     <div className="ranking-artists-component">
@@ -62,21 +81,30 @@ const RankingTopArtists = () => {
               <div className="top-artist">
                 <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
                 <div className="ranking flex flex-col">
-                  <div className="items flex mb-4">
+                  <div
+                    className="items flex mb-4"
+                    onClick={() => handleArtistClick(firstArtist)}
+                  >
                     <h1 className="ml-4 mr-2 mt-4 text-2xl">🥇.</h1>
                     <img src={firstArtist.images[0].url} alt="" />
                     <h1 className="mt-4 ml-4" key={firstArtist.id}>
                       {firstArtist.name}
                     </h1>{" "}
                   </div>
-                  <div className="items flex mb-4">
+                  <div
+                    className="items flex mb-4"
+                    onClick={() => handleArtistClick(secondArtist)}
+                  >
                     <h1 className="ml-4 mr-2 mt-4 text-2xl">🥈.</h1>
                     <img src={secondArtist.images[0].url} alt="" />
                     <h1 className="mt-4 ml-4" key={secondArtist.id}>
                       {secondArtist.name}
                     </h1>{" "}
                   </div>
-                  <div className="items flex mb-4">
+                  <div
+                    className="items flex mb-4"
+                    onClick={() => handleArtistClick(thirdArtist)}
+                  >
                     <h1 className="ml-4 mr-2 mt-4 text-2xl">🥉.</h1>
                     <img src={thirdArtist.images[0].url} alt="" />
                     <h1 className="mt-4 ml-4" key={thirdArtist.id}>
@@ -86,12 +114,16 @@ const RankingTopArtists = () => {
                   {topArtists
                     .slice(3)
                     .map((artist: ArtistType, index: number) => (
-                      <div className="items flex mb-4">
-                        <h1 className="ml-6 mr-5 mt-4 text-2x">{index + 4}.</h1>
-                        <img src={artist.images[0].url} alt="" />
-                        <h1 className="mt-4 ml-4" key={artist.id}>
-                          {artist.name}
-                        </h1>{" "}
+                      <div
+                        className="items flex mb-4"
+                        onClick={() => handleArtistClick(artist)}
+                        key={artist.id}
+                      >
+                        <h1 className="ml-4 mr-5 mt-4 text-2xl">
+                          {index + 4}.
+                        </h1>
+                        <img src={artist.images[2].url} alt="" />
+                        <h1 className="mt-4 ml-4">{artist.name}</h1>{" "}
                       </div>
                     ))}
                 </div>
