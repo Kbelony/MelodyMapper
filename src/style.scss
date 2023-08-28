@@ -304,13 +304,23 @@ body{
   .back-button{
     cursor: pointer;
   }
+
   .top-artist{
     .ranking{
       .related-artists-container {
         position: relative; /* Ajoutez cette ligne pour positionner correctement le contenu */
         height: auto; /* Réglez la hauteur sur 'auto' pour s'adapter au contenu */
         max-height: 300px; /* Réglez la hauteur maximale souhaitée pour la div */
-        overflow-y: auto; /* Ajoutez le défilement vertical lorsque le contenu dépasse */
+        overflow-y: auto; 
+        .related-artists{
+          img{
+            width: 100px;
+            max-height: 100px;
+          }
+          img:hover{
+            border: 3px solid white;
+          }
+        }
       }
       .items{
         img{
@@ -332,10 +342,21 @@ body{
       margin-top: 30rem!important;
       top: -36%!important;
     }
+    .related-artists{
+      img{
+        width: 60px;
+        max-height: 60px;
+      }
+      img:hover{
+        border: none;
+      }
+    }
+    
     .back-button{
       position: relative;
-    top: -16px;
+    top: -9px;
     left: 30px;
+    width: 160px;
     img{
       width: 15px;
     }
