@@ -9,6 +9,7 @@ const TracksTop = () => {
 
   interface Track {
     id: string;
+    artists: { name: string }[];
     album: {
       images: {
         url: string;
@@ -75,8 +76,11 @@ const TracksTop = () => {
                 })}
                 .
               </h1>
-              <img src={track.album.images[2].url} alt="" />
-              <h1 className="mt-4 ml-4">{track.name}</h1>{" "}
+              <img src={track.album.images[0].url} alt="" />
+              <div className="text-paragraph flex flex-col">
+                <h1 className="mt-1 ml-4">{track.name}</h1>{" "}
+                <h1 className="mt-1 ml-4 text-xs">{track.artists[0].name}</h1>{" "}
+              </div>
             </div>
           </div>
         ))}
