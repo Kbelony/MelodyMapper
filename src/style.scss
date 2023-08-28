@@ -63,6 +63,11 @@ body{
         margin-left: 300px;
       }
     }
+    @media (max-width: 900px) and (orientation: landscape) {
+      .logo{
+        margin-left: -60px;
+      }
+    }
 }
 .home-component {
     width: 100%;
@@ -296,11 +301,11 @@ body{
   @media (max-width: 820px) {
     .content-border{
       width: 88%;
-      margin-top: 28rem;
+      margin-top: 30rem;
     }
     .back-button{
       position: absolute;
-    top: 165px;
+    top: 165;
     left: 30px;
     img{
       width: 15px;
@@ -317,5 +322,15 @@ body{
         }
       }
     }
+  }
+  @media (max-width: 375px) {
+    .content-border{
+      margin-top: 168%;
+    }
+}
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  .ranking-artists-component{
+    margin-top: 18%;
   }
 }
