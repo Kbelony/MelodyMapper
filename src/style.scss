@@ -344,8 +344,8 @@ body{
     }
     .related-artists{
       img{
-        width: 60px;
-        max-height: 60px;
+        width: 60px!important;
+        max-height: 60px!important;
       }
       img:hover{
         border: none;
