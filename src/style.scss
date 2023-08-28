@@ -297,11 +297,27 @@ body{
   .content-border{
     border:2px solid #FFA41C;
     border-radius: 10px;
+    margin-top: 22rem;
   }
+  .back-button{
+    cursor: pointer;
+  }
+  .top-artist{
+    .ranking{
+      .items{
+        img{
+          width: 60px;
+          max-height: 60px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
   @media (max-width: 820px) {
     .content-border{
       width: 88%;
-      margin-top: 30rem;
+      margin-top: 30rem!important;
     }
     .back-button{
       position: absolute;
@@ -325,12 +341,12 @@ body{
   }
   @media (max-width: 375px) {
     .content-border{
-      margin-top: 168%;
+      margin-top: 168%!important;
     }
 }
-}
+
 @media (max-width: 900px) and (orientation: landscape) {
   .ranking-artists-component{
-    margin-top: 18%;
+    margin-top: 18!important;
   }
 }
