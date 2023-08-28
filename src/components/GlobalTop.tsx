@@ -27,6 +27,8 @@ const GlobalTop = () => {
       genreStat: string;
       discover: string;
       moreButton: string;
+      popularity1: string;
+      popularity2: string;
     };
   }
 
@@ -37,19 +39,30 @@ const GlobalTop = () => {
       genreStat: "📝 Genre du moment",
       discover: "Découvrir des artistes similaires ?",
       moreButton: "+ de stastisques",
+      popularity1: "Vous êtes dans le top ",
+      popularity2: "des auditeurs de",
     },
     en: {
       statsSlogan: "Make way for <span>stastisques</span> !",
       artistStat: "🎙️ Artist of the moment",
       genreStat: "📝 Genre of the moment",
       discover: "Discover similar artists?",
-      moreButton: "+ statistics",
+      moreButton: "+ more statistics",
+      popularity1: "You're in the top ",
+      popularity2: "auditors of",
     },
   };
 
   const translationKey = language || "en";
-  const { statsSlogan, artistStat, genreStat, discover, moreButton } =
-    translations[translationKey];
+  const {
+    statsSlogan,
+    artistStat,
+    genreStat,
+    discover,
+    moreButton,
+    popularity1,
+    popularity2,
+  } = translations[translationKey];
   const [topArtist, setTopArtist] = useState<Artist | null>(null);
   const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
 
@@ -131,9 +144,11 @@ const GlobalTop = () => {
                 {genreStat} : {topArtist?.genres[0] ?? "Unknown genre"}
               </h4>
               <h6 className="text-center text-lg mb-6">
-                Vous êtes dans le top{" "}
-                <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
-                des auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
+                {popularity1}
+                <span>
+                  {topArtist?.popularity ?? "Unknown Popularity"}%
+                </span>{" "}
+                {popularity2} {topArtist?.name ?? "Unknown Artist"} 👏
               </h6>
               <h6 className="text-center text-lg mb-8 ">{discover}</h6>
               <div className="related-artists mb-5 mr-11">
@@ -208,9 +223,9 @@ const GlobalTop = () => {
               {genreStat} : {topArtist?.genres[0] ?? "Unknown genre"}
             </h4>
             <h6 className="text-center text-lg">
-              Vous êtes dans le top{" "}
-              <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span> des
-              auditeurs de {topArtist?.name ?? "Unknown Artist"} 👏
+              {popularity1}
+              <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
+              {popularity2} {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
             <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
               {moreButton}

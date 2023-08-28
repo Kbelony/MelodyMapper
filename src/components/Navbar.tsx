@@ -82,7 +82,7 @@ const Navbar = () => {
                       id="menu-item-3"
                       onClick={handleSignOut}
                     >
-                      Sign out
+                      Sign out / Déconnexion
                     </button>
                   </Link>
                 </form>
