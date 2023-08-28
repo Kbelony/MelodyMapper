@@ -310,6 +310,9 @@ body{
           max-height: 60px;
           border-radius: 50%;
         }
+        .arrow{
+    width: 20px;
+        }
       }
     }
   }
@@ -320,8 +323,8 @@ body{
       margin-top: 30rem!important;
     }
     .back-button{
-      position: absolute;
-    top: 165;
+      position: relative;
+    top: -16px;
     left: 30px;
     img{
       width: 15px;
@@ -331,9 +334,10 @@ body{
       .ranking{
         .items{
           img{
-            width: 60px;
-            max-height: 60px;
-            border-radius: 50%;
+            width: 60px; /* Largeur fixe */
+  height: auto; /* Ajustement proportionnel de la hauteur */
+  max-height: 60px; /* Limite maximale de la hauteur */
+  border-radius: 50%;
           }
         }
       }

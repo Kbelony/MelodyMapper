@@ -1,18 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
 import back from "../assets/images/Vector.svg";
-import { useNavigate } from "react-router-dom";
+import down from "../assets/images/Vector-down.svg";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const RankingTopArtists = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
   const history = useNavigate();
+  const accessToken = localStorage.getItem("access_token") || "";
 
   interface ArtistType {
     name: string;
     images: { url: string }[];
     genres: string[];
     popularity: number;
-    external_urls: { spotify: string }; // Modifié pour être un objet
+    external_urls: { spotify: string };
     id: string;
   }
 
@@ -21,6 +24,7 @@ const RankingTopArtists = () => {
       slogan: string;
       topArtist: string;
       navigate: string;
+      discover: string;
     };
   }
 
@@ -28,22 +32,44 @@ const RankingTopArtists = () => {
     fr: {
       slogan: "Place au <span>stastisques</span> !",
       topArtist: "Classement de vos artistes du moment",
-      navigate: "Page précedente",
+      navigate: "Page précédente",
+      discover: "Découvrir des artistes similaires ?",
     },
     en: {
       slogan: "Make way for <span>stastisques</span> !",
       topArtist: "Ranking your artists of the moment",
       navigate: "Previous page",
+      discover: "Discover similar artists ?",
     },
   };
 
   const translationKey = language || "en";
-  const { slogan, topArtist, navigate } = translations[translationKey];
+  const { slogan, topArtist, navigate, discover } =
+    translations[translationKey];
 
-  const topArtists = JSON.parse(localStorage.getItem("top_artist") ?? "[]");
-  const firstArtist = topArtists.slice(0, 1)[0];
-  const secondArtist = topArtists.slice(1, 2)[0];
-  const thirdArtist = topArtists.slice(2, 3)[0];
+  const topArtists = JSON.parse(localStorage.getItem("top_artist") || "[]");
+
+  const [expandedArtistId, setExpandedArtistId] = useState<string | null>(null);
+  const [relatedArtists, setRelatedArtists] = useState<ArtistType[]>([]);
+
+  const handleArtistClick = async (artist: ArtistType) => {
+    const relatedArtistsUrl = `https://api.spotify.com/v1/artists/${artist.id}/related-artists`;
+
+    try {
+      const response = await axios.get(relatedArtistsUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const relatedArtists = response.data.artists.slice(0, 3);
+      setRelatedArtists(relatedArtists);
+
+      setExpandedArtistId(artist.id);
+    } catch (error) {
+      console.error("Error fetching related artists:", error);
+    }
+  };
 
   return (
     <div className="ranking-artists-component">
@@ -53,7 +79,7 @@ const RankingTopArtists = () => {
             className="text-2xl md:text-3xl text-center mb-4 p-3"
             dangerouslySetInnerHTML={{ __html: slogan as string }}
           ></h4>
-          <div className="back-button flex mb-5" onClick={() => history(-1)}>
+          <div className="back-button flex mb-6" onClick={() => history(-1)}>
             <img className="mr-2 mt-1" src={back} alt="" />
             <p className="text-sm">{navigate}</p>
           </div>
@@ -62,38 +88,57 @@ const RankingTopArtists = () => {
               <div className="top-artist">
                 <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
                 <div className="ranking flex flex-col">
-                  <div className="items flex mb-4">
-                    <h1 className="ml-4 mr-2 mt-4 text-2xl">🥇.</h1>
-                    <img src={firstArtist.images[0].url} alt="" />
-                    <h1 className="mt-4 ml-4" key={firstArtist.id}>
-                      {firstArtist.name}
-                    </h1>{" "}
-                  </div>
-                  <div className="items flex mb-4">
-                    <h1 className="ml-4 mr-2 mt-4 text-2xl">🥈.</h1>
-                    <img src={secondArtist.images[0].url} alt="" />
-                    <h1 className="mt-4 ml-4" key={secondArtist.id}>
-                      {secondArtist.name}
-                    </h1>{" "}
-                  </div>
-                  <div className="items flex mb-4">
-                    <h1 className="ml-4 mr-2 mt-4 text-2xl">🥉.</h1>
-                    <img src={thirdArtist.images[0].url} alt="" />
-                    <h1 className="mt-4 ml-4" key={thirdArtist.id}>
-                      {thirdArtist.name}
-                    </h1>{" "}
-                  </div>
-                  {topArtists
-                    .slice(3)
-                    .map((artist: ArtistType, index: number) => (
-                      <div className="items flex mb-4">
-                        <h1 className="ml-6 mr-5 mt-4 text-2x">{index + 4}.</h1>
-                        <img src={artist.images[0].url} alt="" />
-                        <h1 className="mt-4 ml-4" key={artist.id}>
-                          {artist.name}
-                        </h1>{" "}
+                  {topArtists.map((artist: ArtistType, index: number) => (
+                    <div className="items flex flex-col mb-4" key={artist.id}>
+                      <div className="top-info flex items-center">
+                        <h1 className="ml-4 mr-5 mt-4 text-2xl">
+                          {index + 1}.
+                        </h1>
+                        <img src={artist.images[2].url} alt="" />
+                        <h1 className="mt-4 ml-4">{artist.name}</h1>{" "}
+                        <img
+                          className="flex-end ml-auto arrow mr-4"
+                          src={down}
+                          alt=""
+                          onClick={() => {
+                            if (expandedArtistId === artist.id) {
+                              setExpandedArtistId(null);
+                            } else {
+                              setExpandedArtistId(artist.id);
+                              handleArtistClick(artist);
+                            }
+                          }}
+                        />
                       </div>
-                    ))}
+                      {expandedArtistId === artist.id && (
+                        <div className="related-artists-container">
+                          <h6 className="text-center text-xs mt-5 mb-2">
+                            {discover}
+                          </h6>
+                          <div className="related-artists ml-3.5 flex">
+                            {relatedArtists.map((relatedArtist: ArtistType) => (
+                              <Link
+                                key={relatedArtist.id}
+                                to={relatedArtist.external_urls.spotify}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="related-artist flex flex-col items-center text-center m-1 p-4 pb-0"
+                              >
+                                <img
+                                  src={relatedArtist.images[0].url}
+                                  alt={relatedArtist.name}
+                                  className="mb-2"
+                                />
+                                <h6 className="text-center text-xs mt-2">
+                                  {relatedArtist.name}
+                                </h6>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
