@@ -36,7 +36,7 @@ const RankingTopArtists = () => {
       discover: "Découvrir des artistes similaires ?",
     },
     en: {
-      slogan: "Make way for <span>stastisques</span> !",
+      slogan: "Make way for <span>stastics</span> !",
       topArtist: "Ranking your artists of the moment",
       navigate: "Previous page",
       discover: "Discover similar artists ?",
@@ -112,10 +112,10 @@ const RankingTopArtists = () => {
                       </div>
                       {expandedArtistId === artist.id && (
                         <div className="related-artists-container">
-                          <h6 className="text-center text-xs mt-5 mb-2">
+                          <h6 className="text-center text-xs mt-5">
                             {discover}
                           </h6>
-                          <div className="related-artists ml-3.5 flex">
+                          <div className="related-artists md:justify-center ml-3.5 flex">
                             {relatedArtists.map((relatedArtist: ArtistType) => (
                               <Link
                                 key={relatedArtist.id}

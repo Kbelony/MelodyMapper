@@ -43,7 +43,7 @@ const GlobalTop = () => {
       popularity2: "des auditeurs de",
     },
     en: {
-      statsSlogan: "Make way for <span>stastisques</span> !",
+      statsSlogan: "Make way for <span>stastics</span> !",
       artistStat: "🎙️ Artist of the moment",
       genreStat: "📝 Genre of the moment",
       discover: "Discover similar artists?",

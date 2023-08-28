@@ -298,12 +298,20 @@ body{
     border:2px solid #FFA41C;
     border-radius: 10px;
     margin-top: 22rem;
+    position: absolute;
+    top: -10%;
   }
   .back-button{
     cursor: pointer;
   }
   .top-artist{
     .ranking{
+      .related-artists-container {
+        position: relative; /* Ajoutez cette ligne pour positionner correctement le contenu */
+        height: auto; /* Réglez la hauteur sur 'auto' pour s'adapter au contenu */
+        max-height: 300px; /* Réglez la hauteur maximale souhaitée pour la div */
+        overflow-y: auto; /* Ajoutez le défilement vertical lorsque le contenu dépasse */
+      }
       .items{
         img{
           width: 60px;
@@ -312,6 +320,7 @@ body{
         }
         .arrow{
     width: 20px;
+    cursor: pointer;
         }
       }
     }
@@ -321,6 +330,7 @@ body{
     .content-border{
       width: 88%;
       margin-top: 30rem!important;
+      top: -32%!important;
     }
     .back-button{
       position: relative;
@@ -346,6 +356,7 @@ body{
   @media (max-width: 375px) {
     .content-border{
       margin-top: 168%!important;
+      top: -65%!important;
     }
 }
 
