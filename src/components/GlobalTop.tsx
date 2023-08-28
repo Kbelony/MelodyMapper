@@ -83,7 +83,8 @@ const GlobalTop = () => {
         });
 
         console.log("Top Artists:", response.data.items);
-        setTopArtist(response.data.items[0]); // Set the first artist from the response
+        localStorage.setItem("top_artist", JSON.stringify(response.data.items));
+        setTopArtist(response.data.items[1]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -166,9 +167,11 @@ const GlobalTop = () => {
                   ))}
                 </div>
               </div>
-              <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-                {moreButton}
-              </span>
+              <Link to={"/MelodyMapper/more-stats/"}>
+                <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+                  {moreButton}
+                </span>
+              </Link>
             </div>
           </div>
           <div className="image-part relative">
@@ -227,9 +230,11 @@ const GlobalTop = () => {
               <span>{topArtist?.popularity ?? "Unknown Popularity"}%</span>{" "}
               {popularity2} {topArtist?.name ?? "Unknown Artist"} 👏
             </h6>
-            <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
-              {moreButton}
-            </span>
+            <Link to={"/MelodyMapper/more-stats/"}>
+              <span className="more-button text-center mt-4 p-4 w-4 <a href4 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
+                {moreButton}
+              </span>
+            </Link>
           </div>
         </div>
       </div>

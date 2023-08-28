@@ -80,7 +80,7 @@ body{
       }
     .spotify-button{
         background-color: #1FDF64;
-        margin-left: 40%;
+        margin-left: 39%;
         display: flex;
         align-items: center;
         font-size: 120%;
@@ -258,7 +258,7 @@ body{
                 margin-left: 19%;
                 font-size: 1.2rem;
                 width: 62%;
-                padding-left: 47px;
+                padding-left: 49px;
             }
             .more-button:hover{
               background-color: rgba(64, 64, 64, 1);
@@ -278,6 +278,36 @@ body{
         }
       }
       
+    }
+  }
+}
+.ranking-artists-component{
+  h4{
+    span {
+      background-image: linear-gradient(180deg, #FFA41C 0%, rgba(255, 28, 28, 0.93) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .content-border{
+    border:2px solid #FFA41C;
+    border-radius: 10px;
+  }
+  @media (max-width: 820px) {
+    .content-border{
+      width: 80%;
+      margin-top: 24rem;
+    }
+    .top-artist{
+      .ranking{
+        .items{
+          img{
+            width: 60px;
+            max-height: 60px;
+            border-radius: 50%;
+          }
+        }
+      }
     }
   }
 }
