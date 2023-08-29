@@ -4,6 +4,7 @@ import back from "../assets/images/Vector.svg";
 import { useNavigate } from "react-router-dom";
 import ArtistsTop from "./ArtistsTop";
 import TracksTop from "./TracksTop";
+import CountriesTop from "./CountriesTop";
 
 const RankingTopArtists = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -65,6 +66,7 @@ const RankingTopArtists = () => {
               ></div>
             </label>
           </div>
+          <CountriesTop></CountriesTop>
           <div className="flex justify-center items-center h-screen mb-8">
             <div className="container content-border">
               {showTracksTop && <TracksTop></TracksTop>}

@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 const TracksTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
   const accessToken = localStorage.getItem("access_token") || "";
-
+  const navigate = useNavigate();
   interface Track {
     id: string;
     artists: { name: string }[];
@@ -57,6 +58,10 @@ const TracksTop = () => {
         console.log(response.data.items);
       } catch (error) {
         console.error("Error fetching top tracks:", error);
+        const timer = setTimeout(() => {
+          navigate("/MelodyMapper/");
+        }, 1500);
+        return () => clearTimeout(timer);
       }
     };
 
