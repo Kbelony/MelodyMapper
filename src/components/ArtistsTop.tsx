@@ -76,7 +76,7 @@ const ArtistsTop = () => {
                 .
               </h1>
               <img src={artist.images[2].url} alt="" />
-              <h1 className="mt-4 ml-4">{artist.name}</h1>{" "}
+              <h1 className="mt-4 ml-4 md:text-lg">{artist.name}</h1>{" "}
               <img
                 className="flex-end ml-auto arrow mr-4"
                 src={down}
@@ -93,7 +93,9 @@ const ArtistsTop = () => {
             </div>
             {expandedArtistId === artist.id && (
               <div className="related-artists-container">
-                <h6 className="text-center text-xs mt-5">{discover}</h6>
+                <h6 className="text-center text-xs md:text-sm mt-5">
+                  {discover}
+                </h6>
                 <div className="related-artists md:justify-center ml-3.5 flex">
                   {relatedArtists.map((relatedArtist: ArtistType) => (
                     <Link
