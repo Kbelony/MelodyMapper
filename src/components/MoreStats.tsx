@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
 import axios from "axios";
 import spotifyLogo from "../assets/images/spotify.svg";
+import TracksTop from "./TracksTop";
 
 const MoreStats = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -170,6 +171,10 @@ const MoreStats = () => {
                 </div>
               </div>
             )}
+          </div>
+
+          <div className="w-full flex justify-center">
+            <TracksTop></TracksTop>
           </div>
         </div>
       </div>
