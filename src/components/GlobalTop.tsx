@@ -30,7 +30,6 @@ const GlobalTop = () => {
       };
     };
     name: string;
-    album: { url: string };
   }
 
   interface Translations {
@@ -99,7 +98,7 @@ const GlobalTop = () => {
 
         console.log("Top Artists:", response.data.items);
         localStorage.setItem("top_artist", JSON.stringify(response.data.items));
-        setTopArtist(response.data.items[8]); // Set the first artist from the response
+        setTopArtist(response.data.items[1]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -244,10 +243,27 @@ const GlobalTop = () => {
             src={nowPlaying?.item?.album?.images[0].url}
             alt=""
           />
-          <div className="meta ml-5 text-xs">
-            <div className="uppercase">{nowPlaying?.item?.name}</div>
-            <div>{nowPlaying?.item?.album?.name}</div>
+          <div className="meta justify-center ml-5 mr-1 text-xs">
+            <div className="uppercase">
+              {nowPlaying?.item?.name
+                ? nowPlaying.item.name.length > 10
+                  ? nowPlaying.item.name.substring(0, 15) + "..."
+                  : nowPlaying.item.name
+                : "Unknown"}
+            </div>
+            <div>
+              {nowPlaying?.item?.album?.name
+                ? nowPlaying.item.album.name.length > 10
+                  ? nowPlaying.item.album.name.substring(0, 20)
+                  : nowPlaying.item.album.name
+                : "Unknown"}
+            </div>
             <div className="artist">{nowPlaying?.item?.artists[0].name}</div>
+          </div>
+          <div className="loader flex justify-end">
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
           </div>
         </div>
         <div className="text-wrapper-container">
