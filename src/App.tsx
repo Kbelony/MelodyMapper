@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import GlobalTop from "./components/GlobalTop";
 import { LanguageProvider } from "./components/LanguageContext";
-import RankingTopArtists from "./components/RankingTopArtists";
+import MoreStats from "./components/MoreStats";
 
 function App() {
   return (
@@ -14,10 +14,7 @@ function App() {
         <Routes>
           <Route path="/MelodyMapper/" element={<Home />} />
           <Route path="/MelodyMapper/global-top/" element={<GlobalTop />} />
-          <Route
-            path="/MelodyMapper/more-stats/"
-            element={<RankingTopArtists />}
-          />
+          <Route path="/MelodyMapper/more-stats/" element={<MoreStats />} />
         </Routes>
       </LanguageProvider>
     </div>
