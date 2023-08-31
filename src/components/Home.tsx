@@ -42,7 +42,8 @@ const Home = () => {
   const authEndpoint = "https://accounts.spotify.com/authorize";
   const redirectUrl = "https://kbelony.github.io/MelodyMapper/global-top/";
   const responseType = "token";
-  const scope = "user-top-read";
+  const scope =
+    "user-top-read user-read-private user-read-email user-read-playback-state";
 
   const authUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=${scope}`;
 
