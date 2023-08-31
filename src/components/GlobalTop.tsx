@@ -21,7 +21,14 @@ const GlobalTop = () => {
   }
 
   interface Playing {
-    item: { artists: string }[];
+    item: {
+      artists: { name: string }[];
+      name: string;
+      album: {
+        images: { url: string }[];
+        name: string;
+      };
+    };
     name: string;
     album: { url: string };
   }
