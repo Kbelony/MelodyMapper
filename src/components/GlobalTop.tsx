@@ -243,7 +243,7 @@ const GlobalTop = () => {
             src={nowPlaying?.item?.album?.images[0].url}
             alt=""
           />
-          <div className="meta justify-center ml-5 mr-1 text-xs">
+          <div className="meta justify-center ml-3 mr-2 text-xs">
             <div className="uppercase">
               {nowPlaying?.item?.name
                 ? nowPlaying.item.name.length > 10
