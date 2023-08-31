@@ -20,6 +20,12 @@ const GlobalTop = () => {
     id: string;
   }
 
+  interface Playing {
+    item: { artists: string }[];
+    name: string;
+    album: { url: string };
+  }
+
   interface Translations {
     [key: string]: {
       statsSlogan: string;
@@ -64,6 +70,8 @@ const GlobalTop = () => {
     popularity2,
   } = translations[translationKey];
   const [topArtist, setTopArtist] = useState<Artist | null>(null);
+  const [nowPlaying, setNowPlaying] = useState<Playing | null>(null);
+  const [showNowPlaying, setShowNowPlaying] = useState(false);
   const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
 
   useEffect(() => {
@@ -84,7 +92,7 @@ const GlobalTop = () => {
 
         console.log("Top Artists:", response.data.items);
         localStorage.setItem("top_artist", JSON.stringify(response.data.items));
-        setTopArtist(response.data.items[1]); // Set the first artist from the response
+        setTopArtist(response.data.items[8]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -93,6 +101,39 @@ const GlobalTop = () => {
     if (accessToken) {
       fetchData();
     }
+  }, []);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token") || "";
+    const apiUrl = "https://api.spotify.com/v1/me/player";
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        console.log("Now playing:", response.data);
+
+        if (response.data) {
+          setNowPlaying(response.data);
+          setShowNowPlaying(true);
+
+          const timer = setTimeout(() => {
+            setShowNowPlaying(false);
+          }, 6000);
+
+          // Nettoie le timer lorsque le composant est démonté
+          return () => clearTimeout(timer);
+        }
+      } catch (error) {
+        console.error("Error fetching now playing:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -186,6 +227,22 @@ const GlobalTop = () => {
           backgroundImage: topArtist ? `url(${topArtist.images[0].url})` : "",
         }}
       >
+        <div
+          className={`now-playing flex py-3.5 ${
+            showNowPlaying ? "visible" : ""
+          }`}
+        >
+          <img
+            className=""
+            src={nowPlaying?.item?.album?.images[0].url}
+            alt=""
+          />
+          <div className="meta ml-5 text-xs">
+            <div className="uppercase">{nowPlaying?.item?.name}</div>
+            <div>{nowPlaying?.item?.album?.name}</div>
+            <div className="artist">{nowPlaying?.item?.artists[0].name}</div>
+          </div>
+        </div>
         <div className="text-wrapper-container">
           <div className="shadow"></div>
           <div className="text-wrapper mt-24">

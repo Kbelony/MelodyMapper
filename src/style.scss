@@ -98,7 +98,7 @@ body{
             width: 62%;
         }
       }
-  }
+}
 .global-component{
   .desktop-part{
     h4,h6{
@@ -178,6 +178,36 @@ body{
       z-index: 50;
       position: fixed;
       top: -4px;
+      .now-playing {
+        position: absolute;
+        z-index: 1000;
+        background-color: #1d1d1d;
+        left: 70px;
+        width: 70%;
+        top: 0;
+        transform: translateY(-100%);
+        border-radius: 55px;
+        transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      
+        &.visible {
+          top: 90px;
+          transform: translateY(0);
+          opacity: 1;
+      
+          transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+      
+        .artist {
+          color: #adabab;
+        }
+      
+        img {
+          width: 50px;
+          height: 50px;
+          margin-left: 20px;
+        }
+      }
+      
       .text-wrapper-container{
         overflow-x: hidden;
     overflow-y: auto;
