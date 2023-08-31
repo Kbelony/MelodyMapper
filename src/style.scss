@@ -179,6 +179,9 @@ body{
       position: fixed;
       top: -4px;
       .now-playing {
+        .meta{
+          width: 120px;
+        }
         position: absolute;
         z-index: 1000;
         background-color: #1d1d1d;
@@ -190,7 +193,7 @@ body{
         transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
       
         &.visible {
-          top: 90px;
+          top: 70px;
           transform: translateY(0);
           opacity: 1;
       
@@ -199,6 +202,39 @@ body{
       
         .artist {
           color: #adabab;
+        }
+
+        .loader{
+          rotate: 180deg;
+        }
+
+        .stroke{
+          display: block;
+          position: relative;
+          background: linear-gradient(180deg, #FFA41C 0%, rgba(255, 28, 28, 0.93) 100%);
+          height: 50%;
+          width: 7px;
+          border-radius: 50px;
+          margin: 0 5px;
+          animation: animate 1.2s linear infinite;
+          top: 10px;
+        }
+        @keyframes animate {
+          50%{
+            height: 20%;
+          }
+          100%{
+            height: 50%;
+          }
+        }
+        .stroke:nth-child(1){
+          animation-delay: 0s;
+        }
+        .stroke:nth-child(2){
+          animation-delay: 0.3s;
+        }
+        .stroke:nth-child(3){
+          animation-delay: 0.6s;
         }
       
         img {
