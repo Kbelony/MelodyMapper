@@ -125,7 +125,7 @@ const MoreStats = () => {
                   src={userProfile?.images[1].url}
                   alt=""
                 />
-                <div className="md:ml-4 mt-4 md:mt-9 mx-auto md:mx-0 md:text-left text-center">
+                <div className="md:ml-9 mt-4 md:mt-9 mx-auto md:mx-0 md:text-left text-center">
                   <h2>{userProfile?.display_name}</h2>
                   <h2>{userProfile?.country}</h2>
                   <a href={userProfile?.external_urls?.spotify}>
@@ -148,7 +148,7 @@ const MoreStats = () => {
                   showNowPlaying ? "visible" : ""
                 }`}
               >
-                <div className="text-center mb-3 md:text-xl">{listening}</div>
+                <div className="text-center mb-3 text-xl">{listening}</div>
                 <div className="flex items-center player ml-4 md:ml-0 md:w-full w-96 p-5">
                   <img
                     className="mr-4"
