@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const TracksTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -49,7 +51,7 @@ const TracksTop = () => {
             },
             params: {
               time_range: "medium_term",
-              limit: 15,
+              limit: 30,
             },
           }
         );
@@ -68,27 +70,46 @@ const TracksTop = () => {
     fetchData();
   }, []);
 
+  const settings = {
+    slidesPerView: 0, // Affiche autant d'éléments que possible dans la vue
+    navigation: false,
+  };
+
   return (
-    <div className="top-tracks">
+    <div className="top-tracks flex flex-col items-center">
       <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
-      <div className="ranking flex flex-col">
-        {topTracks.map((track: Track, index: number) => (
-          <div className="items flex flex-col mb-6" key={track.id}>
-            <div className="top-info flex items-center">
-              <h1 className="ml-4 mr-5 mt-4 text-2xl">
-                {(index + 1).toLocaleString("en-US", {
-                  minimumIntegerDigits: 2,
-                })}
-                .
-              </h1>
-              <img src={track.album.images[0].url} alt="" />
-              <div className="text-paragraph flex flex-col">
-                <h1 className="mt-1 ml-4 md:text-xl">{track.name}</h1>{" "}
-                <h1 className="mt-1 ml-4 text-xs">{track.artists[0].name}</h1>{" "}
+      <div className="ranking">
+        <Swiper {...settings} className="swiper-container">
+          {topTracks.map((track: Track, index: number) => (
+            <SwiperSlide key={track.id}>
+              <div className="items flex flex-col mb-6">
+                <div className="top-info flex-col items-center">
+                  <img
+                    src={track.album.images[0].url}
+                    alt=""
+                    style={{ width: "140px", height: "140px" }}
+                  />
+                  <div className="text-paragraph flex flex-col">
+                    <h1 className="mt-1 md:text-xl">
+                      {(index + 1).toLocaleString("en-US", {
+                        minimumIntegerDigits: 2,
+                      })}
+                      .{" "}
+                      {track.name
+                        ? track.name.length > 16
+                          ? track.name.substring(0, 13) + "..."
+                          : track.name
+                        : "Unknown"}
+                    </h1>{" "}
+                    <h1 className="mt-1 text-xs artist">
+                      {track.artists[0].name}
+                    </h1>{" "}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
