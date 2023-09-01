@@ -576,15 +576,11 @@ body{
     
     .swiper-slide {
       width: 80%;
+      .artist{
+          color: #adabab;
+      }
     }
     
-    .swiper-slide:nth-child(2n) {
-      width: 60%;
-    }
-    
-    .swiper-slide:nth-child(3n) {
-      width: 40%;
-    }
     }
 }
 
@@ -639,7 +635,10 @@ body{
       width: 20px!important;
       cursor: pointer;
           }
-    
+.more-stats-component .ranking .swiper-slide{
+  margin-right: -49px;
+  margin-left: -66px;
+          }
   }
   @media (max-width: 375px) {
     .content-border{
