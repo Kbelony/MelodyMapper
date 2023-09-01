@@ -71,7 +71,7 @@ const TracksTop = () => {
   }, []);
 
   const settings = {
-    slidesPerView: "auto", // Affiche autant d'éléments que possible dans la vue
+    slidesPerView: 0, // Affiche autant d'éléments que possible dans la vue
     navigation: false,
   };
 
