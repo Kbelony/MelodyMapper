@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
 import { useNavigate } from "react-router-dom";
-import Carousel from "react-slick";
 import axios from "axios";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const TracksTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -69,29 +69,44 @@ const TracksTop = () => {
 
     fetchData();
   }, []);
+
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesPerView: "auto", // Affiche autant d'éléments que possible dans la vue
+    slidesPerGroup: 2, // Déplace par deux éléments
+    navigation: true,
   };
 
   return (
     <div className="top-tracks flex flex-col items-center">
       <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
-      <div className="ranking flex">
-        <Carousel {...settings}>
+      <div className="ranking">
+        <Swiper {...settings} className="swiper-container">
           {topTracks.map((track: Track, index: number) => (
-            <div className="wrapper" key={track.id}>
+            <SwiperSlide key={track.id}>
               <div className="items flex flex-col mb-6">
                 <div className="top-info flex items-center">
-                  <img src={track.album.images[0].url} alt="" />
+                  <h1 className="ml-4 mr-5 mt-4 text-2xl">
+                    {(index + 1).toLocaleString("en-US", {
+                      minimumIntegerDigits: 2,
+                    })}
+                    .
+                  </h1>
+                  <img
+                    src={track.album.images[0].url}
+                    alt=""
+                    style={{ width: "140px", height: "140px" }}
+                  />
+                  <div className="text-paragraph flex flex-col">
+                    <h1 className="mt-1 ml-4 md:text-xl">{track.name}</h1>{" "}
+                    <h1 className="mt-1 ml-4 text-xs">
+                      {track.artists[0].name}
+                    </h1>{" "}
+                  </div>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </Carousel>
+        </Swiper>
       </div>
     </div>
   );
