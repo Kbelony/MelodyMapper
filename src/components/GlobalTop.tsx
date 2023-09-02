@@ -98,7 +98,7 @@ const GlobalTop = () => {
 
         console.log("Top Artists:", response.data.items);
         localStorage.setItem("top_artist", JSON.stringify(response.data.items));
-        setTopArtist(response.data.items[1]); // Set the first artist from the response
+        setTopArtist(response.data.items[0]); // Set the first artist from the response
       } catch (error) {
         console.error("Error fetching top artists:", error);
       }
@@ -178,6 +178,39 @@ const GlobalTop = () => {
   return (
     <div className="global-component">
       <div className="desktop-part">
+        <div
+          className={`now-playing flex py-3.5 ${
+            showNowPlaying ? "visible" : ""
+          }`}
+        >
+          <img
+            className=""
+            src={nowPlaying?.item?.album?.images[0].url}
+            alt=""
+          />
+          <div className="meta justify-center ml-3 mr-2 text-xs">
+            <div className="uppercase">
+              {nowPlaying?.item?.name
+                ? nowPlaying.item.name.length > 10
+                  ? nowPlaying.item.name.substring(0, 15) + "..."
+                  : nowPlaying.item.name
+                : "Unknown"}
+            </div>
+            <div>
+              {nowPlaying?.item?.album?.name
+                ? nowPlaying.item.album.name.length > 10
+                  ? nowPlaying.item.album.name.substring(0, 20)
+                  : nowPlaying.item.album.name
+                : "Unknown"}
+            </div>
+            <div className="artist">{nowPlaying?.item?.artists[0].name}</div>
+          </div>
+          <div className="loader flex justify-end">
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+            <span className="stroke"></span>
+          </div>
+        </div>
         <div className="mt-20 flex">
           <div className="stats-part p-9 mt-24 flex-grow">
             <h4
