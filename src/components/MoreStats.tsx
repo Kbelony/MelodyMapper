@@ -4,6 +4,7 @@ import axios from "axios";
 import spotifyLogo from "../assets/images/spotify.svg";
 import TracksTop from "./TracksTop";
 import CountriesTop from "./CountriesTop";
+import ArtistsTop from "./ArtistsTop";
 
 const MoreStats = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -177,8 +178,11 @@ const MoreStats = () => {
           <div className="w-full flex justify-center">
             <TracksTop></TracksTop>
           </div>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-start">
             <CountriesTop></CountriesTop>
+          </div>
+          <div className="w-full flex justify-start">
+            <ArtistsTop></ArtistsTop>
           </div>
         </div>
       </div>
