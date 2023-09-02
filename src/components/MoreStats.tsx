@@ -134,7 +134,7 @@ const MoreStats = () => {
             dangerouslySetInnerHTML={{ __html: slogan as string }}
           ></h4>
           <div
-            className="back-button flex mb-3 mt-2"
+            className="back-button flex mb-3 mt-8"
             onClick={() => history(-1)}
           >
             <img className="mr-2 mt-1" src={back} alt="" />
@@ -149,8 +149,9 @@ const MoreStats = () => {
                   alt=""
                 />
                 <div className="md:ml-9 mt-4 md:mt-9 mx-auto md:mx-0 md:text-left text-center">
-                  <h2>{userProfile?.display_name}</h2>
                   <h2>{userProfile?.country}</h2>
+                  <h2>{userProfile?.display_name}</h2>
+
                   <a href={userProfile?.external_urls?.spotify}>
                     <span className="spotify-button p-4 w-44 md:mt-2 mt-3 rounded-2xl grid grid-cols-1 justify-items-center mb-9">
                       <img
