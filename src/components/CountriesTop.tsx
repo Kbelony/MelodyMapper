@@ -1,7 +1,33 @@
-import { useState } from "react";
-import leftArrow from "../assets/images/left-arrow.svg";
+import { useContext } from "react";
+import { LanguageContext } from "./LanguageContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const CountriesTop = () => {
+  const { language } = useContext(LanguageContext) || { language: "en" };
+  interface Translations {
+    [key: string]: {
+      topArtist: string;
+      topArtistSubtitle: string;
+    };
+  }
+
+  const translations: Translations = {
+    fr: {
+      topArtist: "Classement des pays dont vous streamez le plus le contenu :",
+      topArtistSubtitle: "Voici la liste des pays que vous streamez le plus",
+    },
+    en: {
+      topArtist: "Ranking of countries whose content you stream the most :",
+      topArtistSubtitle:
+        "Here's a list of the countries you stream from the most:",
+    },
+  };
+
+  const translationKey = language || "en";
+  const { topArtist, topArtistSubtitle } = translations[translationKey];
+
   const genreCountryMapping = [
     {
       genre: "pop",
@@ -520,17 +546,20 @@ const CountriesTop = () => {
     },
   ];
 
-  const topArtists = JSON.parse(localStorage.getItem("top_artist") || "[]");
+  const topArtists: { genres: string[] }[] = JSON.parse(
+    localStorage.getItem("top_artist") || "[]"
+  );
 
   const genreCountryCounter: { [key: string]: { [key: string]: number } } = {};
 
-  topArtists.forEach((artist: { genres: string[] }) => {
+  topArtists.forEach((artist) => {
     artist.genres.forEach((genre) => {
-      const country = genreCountryMapping.find(
+      const countryInfo = genreCountryMapping.find(
         (mapping) => mapping.genre.toLowerCase() === genre.toLowerCase()
-      )?.country;
+      );
 
-      if (country) {
+      if (countryInfo) {
+        const { country } = countryInfo;
         genreCountryCounter[genre] = genreCountryCounter[genre] || {};
         genreCountryCounter[genre][country] =
           (genreCountryCounter[genre][country] || 0) + 1;
@@ -549,33 +578,52 @@ const CountriesTop = () => {
     });
   });
 
-  // Trier les pays par total décroissant
   const sortedCountries = Object.keys(countryTotals).sort(
     (a, b) => countryTotals[b] - countryTotals[a]
   );
 
-  const [showResults, setShowResults] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowResults(!showResults);
+  const settings = {
+    slidesPerView: "auto" as const,
+    centeredSlides: true,
+    spaceBetween: 1,
+    loop: false,
   };
 
   return (
-    <div className="countries-component">
-      <div className={`button-and-list ${showResults ? "show-list" : ""}`}>
-        <img onClick={handleButtonClick} src={leftArrow} alt="" />
-        <div className="countries-list">
-          {sortedCountries.map((country, index: number) => (
-            <div key={country}>
-              <h1 className="ml-4 mr-5 mt-4 text-center text-xl">
-                {(index + 1).toLocaleString("en-US", {
-                  minimumIntegerDigits: 2,
-                })}
-              </h1>
-              <h3 className="text-center">{country}</h3>
-            </div>
+    <div className="top-countries flex flex-col items-center w-full">
+      <div className="text-left text-content">
+        <h3 className="text-lg mt-4">{topArtist}</h3>
+        <h3 className="text-sm mb-6 subtitle">{topArtistSubtitle}</h3>
+      </div>
+
+      <div className="ranking w-full">
+        <Swiper {...settings} className="swiper-container">
+          {sortedCountries.map((country, index) => (
+            <SwiperSlide key={country}>
+              <div className="items flex flex-col mb-6">
+                <div className="top-info flex-col items-center">
+                  <img
+                    src={
+                      genreCountryMapping.find(
+                        (mapping) => mapping.country === country
+                      )?.img
+                    }
+                    alt=""
+                    style={{ width: "140px", height: "140px" }}
+                  />
+                  <div className="text-paragraph flex flex-col">
+                    <h1 className="mt-1 md:text-xl">
+                      {(index + 1).toLocaleString("en-US", {
+                        minimumIntegerDigits: 2,
+                      })}
+                      . {country}
+                    </h1>{" "}
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </div>
   );
