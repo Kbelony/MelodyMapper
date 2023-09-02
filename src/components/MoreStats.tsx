@@ -7,6 +7,7 @@ import CountriesTop from "./CountriesTop";
 import ArtistsTop from "./ArtistsTop";
 import back from "../assets/images/Vector.svg";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const MoreStats = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -128,7 +129,7 @@ const MoreStats = () => {
   return (
     <div className="more-stats-component">
       <div className="flex flex-col md:flex-row items-center justify-center">
-        <div className="container mt-16 md:mt-12 p-0 md:p-9">
+        <div className="container mb-5 mt-16 md:mt-12 p-0 md:p-9">
           <h4
             className="text-2xl md:text-3xl text-center mb-4 p-3"
             dangerouslySetInnerHTML={{ __html: slogan as string }}
@@ -202,6 +203,7 @@ const MoreStats = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
