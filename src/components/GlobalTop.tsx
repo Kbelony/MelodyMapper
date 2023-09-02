@@ -322,12 +322,12 @@ const GlobalTop = () => {
             ))}
           </div>
           <div className="text-wrapper op-4">
-            {Array.from({ length: 4 }).map((_, index) => (
+            {Array.from({ length: 7 }).map((_, index) => (
               <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
             ))}
           </div>
           <div className="text-wrapper op-2">
-            {Array.from({ length: 4 }).map((_, index) => (
+            {Array.from({ length: 7 }).map((_, index) => (
               <h2 key={index}>{topArtist?.name ?? "Unknown Artist"}</h2>
             ))}
           </div>
