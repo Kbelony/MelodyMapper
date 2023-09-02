@@ -60,7 +60,6 @@ const MoreStats = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token") || "";
     const apiUrl = "https://api.spotify.com/v1/me/player";
-
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl, {
@@ -86,7 +85,16 @@ const MoreStats = () => {
       }
     };
 
+    // Démarrez fetchData immédiatement
     fetchData();
+
+    // Planifiez fetchData pour s'exécuter toutes les 90 secondes (1 minute et 30 secondes)
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 90 * 1000); // 90 secondes en millisecondes
+
+    // Nettoyez l'intervalle lorsque le composant est démonté
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -164,11 +172,6 @@ const MoreStats = () => {
                     <div className="artist">
                       {nowPlaying?.item?.artists[0].name}
                     </div>
-                  </div>
-                  <div className="loader flex justify-end">
-                    <span className="stroke"></span>
-                    <span className="stroke"></span>
-                    <span className="stroke"></span>
                   </div>
                 </div>
               </div>
