@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -15,6 +15,9 @@ const TracksTop = () => {
     id: string;
     artists: { name: string }[];
     album: {
+      external_urls: {
+        spotify: string;
+      };
       images: {
         url: string;
       }[];
@@ -99,11 +102,14 @@ const TracksTop = () => {
             <SwiperSlide key={track.id}>
               <div className="items flex flex-col mb-6">
                 <div className="top-info flex-col items-center">
-                  <img
-                    src={track.album.images[0].url}
-                    alt=""
-                    style={{ width: "140px", height: "140px" }}
-                  />
+                  <Link to={track.album.external_urls.spotify}>
+                    <img
+                      src={track.album.images[0].url}
+                      alt=""
+                      style={{ width: "140px", height: "140px" }}
+                    />
+                  </Link>
+
                   <div className="text-paragraph flex flex-col">
                     <h1 className="mt-1 md:text-xl">
                       {(index + 1).toLocaleString("en-US", {
