@@ -3,6 +3,7 @@ import { LanguageContext } from "./LanguageContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 
 const CountriesTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -588,6 +589,7 @@ const CountriesTop = () => {
     centeredSlides: true,
     spaceBetween: 1,
     loop: false,
+    navigation: true,
   };
 
   return (
@@ -598,7 +600,11 @@ const CountriesTop = () => {
       </div>
 
       <div className="ranking w-full">
-        <Swiper {...settings} className="swiper-container">
+        <Swiper
+          {...settings}
+          modules={[Navigation]}
+          className="swiper-container"
+        >
           {sortedCountries.map((country, index) => (
             <SwiperSlide key={country}>
               <div className="items flex flex-col mb-6">

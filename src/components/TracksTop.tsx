@@ -5,6 +5,7 @@ import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 
 const TracksTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -78,6 +79,7 @@ const TracksTop = () => {
     centeredSlides: true,
     spaceBetween: 1,
     loop: false,
+    navigation: true,
   };
 
   return (
@@ -88,7 +90,11 @@ const TracksTop = () => {
       </div>
 
       <div className="ranking w-full">
-        <Swiper {...settings} className="swiper-container">
+        <Swiper
+          {...settings}
+          modules={[Navigation]}
+          className="swiper-container"
+        >
           {topTracks.map((track: Track, index: number) => (
             <SwiperSlide key={track.id}>
               <div className="items flex flex-col mb-6">
