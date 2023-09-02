@@ -609,6 +609,9 @@ body{
     border-radius: 50%;
     background-color: #D9D9D9;
     }
+    .swiper-button-disabled{
+      display: none;
+    }
     .swiper-button-next{
       left: 97%;
     top: 83px;
@@ -679,6 +682,9 @@ body{
       border-radius: 50%;
       background-color: #D9D9D9;
       }
+      .swiper-button-disabled{
+        display: none;
+      }
   .swiper-button-prev:after,.swiper-button-next:after{
     font-size: 20px;
     color: black;
@@ -745,6 +751,27 @@ body{
         }
       }
       }
+    }
+  }
+}
+.privacy-policy-component{
+  a{
+    color: #428bca;
+    text-decoration: underline;
+  }
+  .back-button{
+    cursor: pointer;
+  }
+}
+.footer-component{
+  a{
+    border-left: 2px solid;
+    border-right: 2px solid;
+    color: white;
+    text-decoration: none;
+    p:hover{
+      color: #428bca;
+    text-decoration: underline;
     }
   }
 }
