@@ -24,20 +24,23 @@ const TracksTop = () => {
   interface Translations {
     [key: string]: {
       topArtist: string;
+      topArtistSubtitle: string;
     };
   }
 
   const translations: Translations = {
     fr: {
-      topArtist: "Classement de vos titres du moment",
+      topArtist: "Classement de vos titres du moment :",
+      topArtistSubtitle: "Voici vos sons les plus streamez",
     },
     en: {
-      topArtist: "Ranking your tracks of the moment",
+      topArtist: "Ranking your tracks of the moment :",
+      topArtistSubtitle: "Here are your most streamed sounds",
     },
   };
 
   const translationKey = language || "en";
-  const { topArtist } = translations[translationKey];
+  const { topArtist, topArtistSubtitle } = translations[translationKey];
   const [topTracks, setTopTracks] = useState([]);
 
   useEffect(() => {
@@ -51,7 +54,7 @@ const TracksTop = () => {
             },
             params: {
               time_range: "medium_term",
-              limit: 30,
+              limit: 45,
             },
           }
         );
@@ -71,14 +74,20 @@ const TracksTop = () => {
   }, []);
 
   const settings = {
-    slidesPerView: 0, // Affiche autant d'éléments que possible dans la vue
-    navigation: false,
+    slidesPerView: "auto" as const,
+    centeredSlides: true,
+    spaceBetween: 1,
+    loop: false,
   };
 
   return (
-    <div className="top-tracks flex flex-col items-center">
-      <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
-      <div className="ranking">
+    <div className="top-tracks flex flex-col items-center w-full">
+      <div className="text-left text-content">
+        <h3 className="text-lg mt-4">{topArtist}</h3>
+        <h3 className="text-sm mb-6 subtitle">{topArtistSubtitle}</h3>
+      </div>
+
+      <div className="ranking w-full">
         <Swiper {...settings} className="swiper-container">
           {topTracks.map((track: Track, index: number) => (
             <SwiperSlide key={track.id}>
