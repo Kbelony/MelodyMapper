@@ -102,30 +102,30 @@ const TracksTop = () => {
             <SwiperSlide key={track.id}>
               <div className="items flex flex-col mb-6">
                 <div className="top-info flex-col items-center">
-                  <Link to={track.album.external_urls.spotify}>
-                    <img
-                      src={track.album.images[0].url}
-                      alt=""
-                      style={{ width: "140px", height: "140px" }}
-                    />
-                  </Link>
+                  <img
+                    src={track.album.images[0].url}
+                    alt=""
+                    style={{ width: "140px", height: "140px" }}
+                  />
 
-                  <div className="text-paragraph flex flex-col">
-                    <h1 className="mt-1 md:text-xl">
-                      {(index + 1).toLocaleString("en-US", {
-                        minimumIntegerDigits: 2,
-                      })}
-                      .{" "}
-                      {track.name
-                        ? track.name.length > 16
-                          ? track.name.substring(0, 13) + "..."
-                          : track.name
-                        : "Unknown"}
-                    </h1>{" "}
-                    <h1 className="mt-1 text-xs artist">
-                      {track.artists[0].name}
-                    </h1>{" "}
-                  </div>
+                  <Link to={track.album.external_urls.spotify}>
+                    <div className="text-paragraph flex flex-col">
+                      <h1 className="mt-1 md:text-xl">
+                        {(index + 1).toLocaleString("en-US", {
+                          minimumIntegerDigits: 2,
+                        })}
+                        .{" "}
+                        {track.name
+                          ? track.name.length > 16
+                            ? track.name.substring(0, 13) + "..."
+                            : track.name
+                          : "Unknown"}
+                      </h1>{" "}
+                      <h1 className="mt-1 text-xs artist">
+                        {track.artists[0].name}
+                      </h1>{" "}
+                    </div>
+                  </Link>
                 </div>
               </div>
             </SwiperSlide>
