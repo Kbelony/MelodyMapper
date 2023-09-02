@@ -367,6 +367,7 @@ body{
         max-height: 80px;
       }
     }
+    
   }
   .content-border {
     /* Positionnement et marge intérieure pour le pseudo-élément */
@@ -555,12 +556,15 @@ body{
     
   }
   .ranking{
+    .swiper-wrapper{
+      margin-left: -42%;
+    }
     .swiper-slide-image {
       width: 140px;
       height: 140px;
     }
     .swiper-slide {
-    
+      width: 17.4%;
       /* Center slide text vertically */
       display: flex;
       justify-content: center;
@@ -575,13 +579,21 @@ body{
     }
     
     .swiper-slide {
-      width: 80%;
       .artist{
           color: #adabab;
       }
     }
     
     }
+  .top-tracks{
+    .text-content{
+      position: relative;
+      left: -36%;
+      .subtitle{
+        color: #adabab;
+      }
+    }
+  }
 }
 
   @media (max-width: 820px) {
@@ -635,6 +647,23 @@ body{
       width: 20px!important;
       cursor: pointer;
           }
+          .swiper-wrapper{
+            margin-left: -24%!important;
+          }
+          .swiper-slide {
+            width: 70%!important;
+          }
+          .swiper-wrapper{
+            margin-left: -95px;
+          }
+          .text-content{
+            margin-left: -10%;
+            left: 0!important;
+            .subtitle{
+              color: #adabab;
+            }
+          }
+          
 .more-stats-component .ranking .swiper-slide{
   margin-right: -49px;
   margin-left: -66px;
