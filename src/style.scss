@@ -519,7 +519,6 @@ body{
     img{
       width: 80px;
     }
-    .meta{
       .loader{
         rotate: 180deg;
       }
@@ -552,39 +551,9 @@ body{
       .stroke:nth-child(3){
         animation-delay: 0.4s;
       }
-    }
     
   }
-  .ranking{
-    .swiper-wrapper{
-      margin-left: -42%;
-    }
-    .swiper-slide-image {
-      width: 140px;
-      height: 140px;
-    }
-    .swiper-slide {
-      width: 17.4%;
-      /* Center slide text vertically */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .swiper-slide {
-      .artist{
-          color: #adabab;
-      }
-    }
-    
-    }
+  
   .top-tracks{
     .text-content{
       position: relative;
@@ -593,6 +562,76 @@ body{
         color: #adabab;
       }
     }
+    .ranking{
+      .swiper-wrapper{
+        margin-left: -42%;
+      }
+      .swiper-slide-image {
+        width: 140px;
+        height: 140px;
+      }
+      .swiper-slide {
+        width: 17.4%;
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .swiper-slide {
+        .artist{
+            color: #adabab;
+        }
+      }
+      
+      }
+  }
+  .top-countries{
+    .text-content{
+      width: auto;
+      position: relative;
+      left: -30%;
+      .subtitle{
+        color: #adabab;
+      }
+    }
+    .ranking{
+      .swiper-wrapper{
+        margin-left: -43%;
+      }
+      .swiper-slide-image {
+        width: 140px;
+        height: 140px;
+      }
+      .swiper-slide {
+        width: 17.4%;
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .swiper-slide {
+        .artist{
+            color: #adabab;
+        }
+      }
+      
+      }
   }
 }
 
@@ -647,28 +686,49 @@ body{
       width: 20px!important;
       cursor: pointer;
           }
-          .swiper-wrapper{
-            margin-left: -24%!important;
-          }
-          .swiper-slide {
-            width: 70%!important;
-          }
-          .swiper-wrapper{
-            margin-left: -95px;
-          }
-          .text-content{
-            margin-left: -10%;
-            left: 0!important;
-            .subtitle{
-              color: #adabab;
+    .top-tracks{
+            .swiper-wrapper{
+              margin-left: -24%!important;
             }
+            .swiper-slide {
+              width: 70%!important;
+              margin-right: -49px;
+              margin-left: -66px;
+            }
+            .swiper-wrapper{
+              margin-left: -95px;
+            }
+            .text-content{
+              margin-left: -10%;
+              left: 0!important;
+              .subtitle{
+                color: #adabab;
+              }
+            }
+    }
+    .top-countries{
+      .swiper-wrapper{
+        margin-left: -24%!important;
+      }
+      .swiper-slide {
+        width: 70%!important;
+        margin-right: -49px;
+        margin-left: -66px;
+      }
+      .swiper-wrapper{
+        margin-left: -95px;
+      }
+      .text-content{
+        width: 317px!important;
+        margin-left: -10%;
+        left: 0!important;
+        .subtitle{
+          color: #adabab;
+        }
+      }
+    }
           }
           
-.more-stats-component .ranking .swiper-slide{
-  margin-right: -49px;
-  margin-left: -66px;
-          }
-  }
   @media (max-width: 375px) {
     .content-border{
       margin-top: 168%!important;

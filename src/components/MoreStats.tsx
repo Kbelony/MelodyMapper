@@ -3,6 +3,7 @@ import { LanguageContext } from "./LanguageContext";
 import axios from "axios";
 import spotifyLogo from "../assets/images/spotify.svg";
 import TracksTop from "./TracksTop";
+import CountriesTop from "./CountriesTop";
 
 const MoreStats = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
@@ -175,6 +176,9 @@ const MoreStats = () => {
 
           <div className="w-full flex justify-center">
             <TracksTop></TracksTop>
+          </div>
+          <div className="w-full flex justify-center">
+            <CountriesTop></CountriesTop>
           </div>
         </div>
       </div>
