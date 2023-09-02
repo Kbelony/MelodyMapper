@@ -63,11 +63,11 @@ const ArtistsTop = () => {
   };
 
   return (
-    <div className="top-artist">
-      <h3 className="text-center text-lg mb-8 mt-4">{topArtist}</h3>
+    <div className="top-artist flex flex-col items-center  md:items-start w-full">
+      <h3 className="text-left text-lg mb-8 mt-4">{topArtist}</h3>
       <div className="ranking flex flex-col">
         {topArtists.map((artist: ArtistType, index: number) => (
-          <div className="items flex flex-col mb-4" key={artist.id}>
+          <div className="items py-3 flex flex-col mb-6" key={artist.id}>
             <div className="top-info flex items-center">
               <h1 className="ml-4 mr-5 mt-4 text-2xl">
                 {(index + 1).toLocaleString("en-US", {
