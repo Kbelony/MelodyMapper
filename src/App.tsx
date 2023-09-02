@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import GlobalTop from "./components/GlobalTop";
 import { LanguageProvider } from "./components/LanguageContext";
 import MoreStats from "./components/MoreStats";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
           <Route path="/MelodyMapper/" element={<Home />} />
           <Route path="/MelodyMapper/global-top/" element={<GlobalTop />} />
           <Route path="/MelodyMapper/more-stats/" element={<MoreStats />} />
+          <Route
+            path="/MelodyMapper/privacy-policy/"
+            element={<PrivacyPolicy />}
+          />
         </Routes>
       </LanguageProvider>
     </div>
