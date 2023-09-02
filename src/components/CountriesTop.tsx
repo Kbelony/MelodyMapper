@@ -8,25 +8,26 @@ const CountriesTop = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
   interface Translations {
     [key: string]: {
-      topArtist: string;
-      topArtistSubtitle: string;
+      topCountries: string;
+      topCountriesSubtitle: string;
     };
   }
 
   const translations: Translations = {
     fr: {
-      topArtist: "Classement des pays dont vous streamez le plus le contenu :",
-      topArtistSubtitle: "Voici la liste des pays que vous streamez le plus",
+      topCountries:
+        "Classement des pays dont vous streamez le plus le contenu :",
+      topCountriesSubtitle: "Voici la liste des pays que vous streamez le plus",
     },
     en: {
-      topArtist: "Ranking of countries whose content you stream the most :",
-      topArtistSubtitle:
+      topCountries: "Ranking of countries whose content you stream the most :",
+      topCountriesSubtitle:
         "Here's a list of the countries you stream from the most:",
     },
   };
 
   const translationKey = language || "en";
-  const { topArtist, topArtistSubtitle } = translations[translationKey];
+  const { topCountries, topCountriesSubtitle } = translations[translationKey];
 
   const genreCountryMapping = [
     {
@@ -592,8 +593,8 @@ const CountriesTop = () => {
   return (
     <div className="top-countries flex flex-col items-center w-full">
       <div className="text-left text-content">
-        <h3 className="text-lg mt-4">{topArtist}</h3>
-        <h3 className="text-sm mb-6 subtitle">{topArtistSubtitle}</h3>
+        <h3 className="text-lg mt-4">{topCountries}</h3>
+        <h3 className="text-sm mb-6 subtitle">{topCountriesSubtitle}</h3>
       </div>
 
       <div className="ranking w-full">
