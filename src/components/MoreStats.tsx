@@ -5,9 +5,12 @@ import spotifyLogo from "../assets/images/spotify.svg";
 import TracksTop from "./TracksTop";
 import CountriesTop from "./CountriesTop";
 import ArtistsTop from "./ArtistsTop";
+import back from "../assets/images/Vector.svg";
+import { useNavigate } from "react-router-dom";
 
 const MoreStats = () => {
   const { language } = useContext(LanguageContext) || { language: "en" };
+  const history = useNavigate();
 
   interface Playing {
     item: {
@@ -35,6 +38,7 @@ const MoreStats = () => {
       slogan: string;
       profile: string;
       listening: string;
+      navigate: string;
     };
   }
 
@@ -43,16 +47,18 @@ const MoreStats = () => {
       slogan: "Place au <span>stastisques</span> !",
       profile: "Profil",
       listening: "Vous écoutez actuellement :",
+      navigate: "Page précédente",
     },
     en: {
       slogan: "Make way for <span>stastics</span> !",
       profile: "Profile",
       listening: "You are currently listening to :",
+      navigate: "Previous page",
     },
   };
 
   const translationKey = language || "en";
-  const { slogan, profile, listening } = translations[translationKey];
+  const { slogan, profile, listening, navigate } = translations[translationKey];
   const [nowPlaying, setNowPlaying] = useState<Playing | null>(null);
   const [userProfile, setUserProfile] = useState<Profil | null>(null);
   const [showNowPlaying, setShowNowPlaying] = useState(false);
@@ -60,7 +66,6 @@ const MoreStats = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token") || "";
     const apiUrl = "https://api.spotify.com/v1/me/player";
-
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl, {
@@ -86,7 +91,16 @@ const MoreStats = () => {
       }
     };
 
+    // Démarrez fetchData immédiatement
     fetchData();
+
+    // Planifiez fetchData pour s'exécuter toutes les 90 secondes (1 minute et 30 secondes)
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 90 * 1000); // 90 secondes en millisecondes
+
+    // Nettoyez l'intervalle lorsque le composant est démonté
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -119,7 +133,13 @@ const MoreStats = () => {
             className="text-2xl md:text-3xl text-center mb-4 p-3"
             dangerouslySetInnerHTML={{ __html: slogan as string }}
           ></h4>
-
+          <div
+            className="back-button flex mb-3 mt-2"
+            onClick={() => history(-1)}
+          >
+            <img className="mr-2 mt-1" src={back} alt="" />
+            <p className="text-sm">{navigate}</p>
+          </div>
           <div className="md:flex">
             <div className="md:w-1/2">
               <div className="meta-profile flex flex-col md:flex-row md:items-center">
@@ -164,11 +184,6 @@ const MoreStats = () => {
                     <div className="artist">
                       {nowPlaying?.item?.artists[0].name}
                     </div>
-                  </div>
-                  <div className="loader flex justify-end">
-                    <span className="stroke"></span>
-                    <span className="stroke"></span>
-                    <span className="stroke"></span>
                   </div>
                 </div>
               </div>
