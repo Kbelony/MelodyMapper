@@ -93,10 +93,10 @@ const ArtistsTop = () => {
             </div>
             {expandedArtistId === artist.id && (
               <div className="related-artists-container">
-                <h6 className="text-center text-xs md:text-sm mt-5">
+                <h6 className="text-left text-xs md:text-sm mt-5 md:ml-20 ml-9">
                   {discover}
                 </h6>
-                <div className="related-artists md:justify-center ml-3.5 flex">
+                <div className="related-artists md:justify-start ml-3.5 md:ml-11 flex">
                   {relatedArtists.map((relatedArtist: ArtistType) => (
                     <Link
                       key={relatedArtist.id}
