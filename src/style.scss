@@ -763,6 +763,8 @@ body{
           img{
             width: 100px;
             max-height: 100px;
+            min-height: 80px;
+            min-width: 80px;
           }
           img:hover{
             border: 3px solid white;
@@ -905,8 +907,9 @@ body{
         .items{
           cursor: pointer;
           .related-artists{
-            min-height: 80px;
+            min-height: 80px!important;
             min-width: 80px;
+
           }
           img{
             width: 80px!important;

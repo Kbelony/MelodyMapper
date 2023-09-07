@@ -53,7 +53,7 @@ const ArtistsTop = () => {
         },
       });
 
-      const relatedArtists = response.data.artists.slice(0, 3);
+      const relatedArtists = response.data.artists.slice(0, 8);
       setRelatedArtists(relatedArtists);
 
       setExpandedArtistId(artist.id);
