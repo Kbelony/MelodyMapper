@@ -663,7 +663,7 @@ const CountriesTop = () => {
               <div className="items-rounds px-7 py-1 flex flex-col mb-6">
                 <div className="top-info flex-col items-center">
                   <div className="text-paragraph flex flex-col">
-                    <h1 className="mt-1 md:text-base">{genre}</h1>{" "}
+                    <h1 className=" md:text-base">{genre}</h1>{" "}
                   </div>
                 </div>
               </div>
