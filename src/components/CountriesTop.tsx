@@ -11,6 +11,8 @@ const CountriesTop = () => {
     [key: string]: {
       topCountries: string;
       topCountriesSubtitle: string;
+      topGenres: string;
+      topGenresSubtitle: string;
     };
   }
 
@@ -19,16 +21,21 @@ const CountriesTop = () => {
       topCountries:
         "Classement des pays dont vous streamez le plus le contenu :",
       topCountriesSubtitle: "Voici la liste des pays que vous streamez le plus",
+      topGenres: "Classement de vos genres les plus streamer :",
+      topGenresSubtitle: "Voici la liste des genres que vous streamez le plus",
     },
     en: {
       topCountries: "Ranking of countries whose content you stream the most :",
       topCountriesSubtitle:
         "Here's a list of the countries you stream from the most:",
+      topGenres: "Ranking of your most streamed genres :",
+      topGenresSubtitle: "Here's a list of the genres you stream the most",
     },
   };
 
   const translationKey = language || "en";
-  const { topCountries, topCountriesSubtitle } = translations[translationKey];
+  const { topCountries, topCountriesSubtitle, topGenres, topGenresSubtitle } =
+    translations[translationKey];
 
   const genreCountryMapping = [
     {
@@ -553,6 +560,7 @@ const CountriesTop = () => {
   );
 
   const genreCountryCounter: { [key: string]: { [key: string]: number } } = {};
+  const genreCounter: { [key: string]: number } = {}; // Ajoutez cette ligne
 
   topArtists.forEach((artist) => {
     artist.genres.forEach((genre) => {
@@ -565,6 +573,9 @@ const CountriesTop = () => {
         genreCountryCounter[genre] = genreCountryCounter[genre] || {};
         genreCountryCounter[genre][country] =
           (genreCountryCounter[genre][country] || 0) + 1;
+
+        // Incrémente le compteur de genre
+        genreCounter[genre] = (genreCounter[genre] || 0) + 1;
       }
     });
   });
@@ -582,6 +593,10 @@ const CountriesTop = () => {
 
   const sortedCountries = Object.keys(countryTotals).sort(
     (a, b) => countryTotals[b] - countryTotals[a]
+  );
+
+  const sortedGenres = Object.keys(genreCounter).sort(
+    (a, b) => genreCounter[b] - genreCounter[a]
   );
 
   const settings = {
@@ -625,6 +640,30 @@ const CountriesTop = () => {
                       })}
                       . {country}
                     </h1>{" "}
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className="text-left text-content text-genre">
+        <h3 className="text-lg mt-4">{topGenres}</h3>
+        <h3 className="text-sm mb-6 subtitle">{topGenresSubtitle}</h3>
+      </div>
+
+      <div className="ranking w-full">
+        <Swiper
+          {...settings}
+          modules={[Navigation]}
+          className="swiper-container genre"
+        >
+          {sortedGenres.map((genre) => (
+            <SwiperSlide key={genre}>
+              <div className="items-rounds px-7 py-1 flex flex-col mb-6">
+                <div className="top-info flex-col items-center">
+                  <div className="text-paragraph flex flex-col">
+                    <h1 className="mt-1 md:text-base">{genre}</h1>{" "}
                   </div>
                 </div>
               </div>

@@ -660,12 +660,30 @@ body{
     .text-content{
       width: auto;
       position: relative;
-      left: -30%;
+      left: -28%;
+      .subtitle{
+        color: #adabab;
+      }
+    }
+    .text-content.text-genre{
+      width: auto;
+      position: relative;
+      left: -33%;
       .subtitle{
         color: #adabab;
       }
     }
     .ranking{
+      .items-rounds{
+        border: 1px solid white;
+        border-radius: 50px;
+      }
+      .genre{
+        .swiper-button-prev,.swiper-button-next{
+        top: 25px;
+
+        }
+      }
       .swiper-button-prev{
         left: 19px;
       top: 83px;
@@ -724,6 +742,7 @@ body{
     .ranking{
       width: 100%;
       .items{
+        cursor: pointer;
         background-color: #2C2C2C;
         border-radius: 10px;
         img{
@@ -851,6 +870,12 @@ body{
             }
     }
     .top-countries{
+      .items-rounds {
+        .swiper-button-next{
+          left: 91%!important;
+          top: 44px!important;
+        }
+      }
       .swiper-button-next{
         left: 91%!important;
       }
@@ -878,6 +903,7 @@ body{
       .ranking{
         width: 92%!important;
         .items{
+          cursor: pointer;
           .related-artists{
             min-height: 80px;
             min-width: 80px;
