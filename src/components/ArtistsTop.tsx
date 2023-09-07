@@ -67,7 +67,18 @@ const ArtistsTop = () => {
       <h3 className="text-left text-lg mb-8 mt-4">{topArtist}</h3>
       <div className="ranking flex flex-col">
         {topArtists.map((artist: ArtistType, index: number) => (
-          <div className="items py-3 flex flex-col mb-6" key={artist.id}>
+          <div
+            className="items py-3 flex flex-col mb-6"
+            onClick={() => {
+              if (expandedArtistId === artist.id) {
+                setExpandedArtistId(null);
+              } else {
+                setExpandedArtistId(artist.id);
+                handleArtistClick(artist);
+              }
+            }}
+            key={artist.id}
+          >
             <div className="top-info flex items-center">
               <h1 className="ml-4 mr-5 mt-4 text-2xl">
                 {(index + 1).toLocaleString("en-US", {
